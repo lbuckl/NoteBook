@@ -85,6 +85,7 @@ public class ItemFragmentNotes extends Fragment {
             public int getItemCount() {
                 return MainActivity.notes.getNotesSize();
             }
+
         };
         return view;
     }
