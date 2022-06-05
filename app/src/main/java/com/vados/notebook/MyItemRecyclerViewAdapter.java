@@ -20,6 +20,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
 
     private final List<PlaceholderItem> mValues;
 
+    //Конструктор
     public MyItemRecyclerViewAdapter(List<PlaceholderItem> items) {
         mValues = items;
     }

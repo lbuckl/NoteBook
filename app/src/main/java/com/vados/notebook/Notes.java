@@ -53,6 +53,7 @@ public class Notes {
     public void setNoteName(String name){
         noteNames.add(name);
     }
+
     //записать Значение по id
     public void setNote(String note){
         notes.add(note);

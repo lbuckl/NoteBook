@@ -27,8 +27,8 @@ public class MainActivity extends AppCompatActivity {
                 .replace(R.id.fragment_container,new ItemFragmentNotes())
                 .commit();
 
-        notes.setNoteName("One");
-        notes.setNoteName("Two");
+        //notes.setNoteName("One");
+        //notes.setNoteName("Two");
     }
 
     public void ClickListener(){

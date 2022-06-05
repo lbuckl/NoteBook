@@ -57,7 +57,7 @@ public class ItemFragmentNotes extends Fragment {
         View view = inflater.inflate(R.layout.fragment_item_notes_list, container, false);
 
         // Set the adapter
-        /*if (view instanceof RecyclerView) {
+        if (view instanceof RecyclerView) {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
             if (mColumnCount <= 1) {
@@ -66,27 +66,8 @@ public class ItemFragmentNotes extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
             recyclerView.setAdapter(new MyItemRecyclerViewAdapter(PlaceholderContent.ITEMS));
-        }*/
-        RecyclerView recyclerView = (RecyclerView) view;
+        }
 
-        RecyclerView.Adapter adapter = new RecyclerView.Adapter() {
-            @NonNull
-            @Override
-            public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                return null;
-            }
-
-            @Override
-            public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-
-            }
-
-            @Override
-            public int getItemCount() {
-                return MainActivity.notes.getNotesSize();
-            }
-
-        };
         return view;
     }
 
