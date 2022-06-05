@@ -21,8 +21,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void Initialization(){
-        notes.addNewNote("One");
-        notes.addNewNote("Two","descr2");
         button_add = findViewById(R.id.button_add);
         button_settings = findViewById(R.id.button_settings);
         getSupportFragmentManager()
@@ -34,9 +32,7 @@ public class MainActivity extends AppCompatActivity {
     public void ClickListener(){
         button_add.setOnClickListener(v -> {
             //открываем фрагмент с добавлением/изменением заметки
-            Toast toast = Toast.makeText(getApplicationContext(),
-                    String.valueOf(notes.getNotesSize()), Toast.LENGTH_SHORT);
-            toast.show();
+
         });
 
         button_settings.setOnClickListener(v -> {

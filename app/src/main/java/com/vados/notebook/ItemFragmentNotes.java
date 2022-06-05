@@ -69,18 +69,25 @@ public class ItemFragmentNotes extends Fragment {
             PlaceholderContent placeholderContent = new PlaceholderContent();
             //ковыряем адаптер
             try{
-                for(int i=1;i<=MainActivity.notes.getNotesSize();i++){
-                    placeholderContent.addItem(i,
-                            MainActivity.notes.getNameForId(i-1),
-                            MainActivity.notes.getNoteForId(i-1));
+                int noteSize = MainActivity.notes.getNotesSize();
+                if (noteSize >=1) {
+                    for (int i = 1; i <= noteSize; i++) {
+                        placeholderContent.addItem(i,
+                                MainActivity.notes.getNameForId(i - 1),
+                                MainActivity.notes.getNoteForId(i - 1));
+                    }
+                }
+                else {
+                    placeholderContent.addItem(1,
+                            "",
+                            "");
                 }
             }catch (IndexOutOfBoundsException e){
                 e.printStackTrace();
             }
 
-
-            placeholderContent.setCount(MainActivity.notes.getNotesSize()); // передаём количество элементов
-            recyclerView.setAdapter(new MyItemRecyclerViewAdapter(placeholderContent.getItems()));
+            //placeholderContent.setCount(MainActivity.notes.getNotesSize()); // передаём количество элементов
+            recyclerView.setAdapter(new MyItemRecyclerViewAdapter(placeholderContent.getItems())); //передаём
         }
 
         return view;
