@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,24 +21,29 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void Initialization(){
+        notes.addNewNote("One");
+        notes.addNewNote("Two","descr2");
         button_add = findViewById(R.id.button_add);
         button_settings = findViewById(R.id.button_settings);
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragment_container,new ItemFragmentNotes())
                 .commit();
-
-        //notes.setNoteName("One");
-        //notes.setNoteName("Two");
     }
 
     public void ClickListener(){
         button_add.setOnClickListener(v -> {
             //открываем фрагмент с добавлением/изменением заметки
+            Toast toast = Toast.makeText(getApplicationContext(),
+                    String.valueOf(notes.getNotesSize()), Toast.LENGTH_SHORT);
+            toast.show();
         });
 
         button_settings.setOnClickListener(v -> {
             //открываем фрагмент с настройками
+            Toast toast = Toast.makeText(getApplicationContext(),
+                    notes.getNameForId(1), Toast.LENGTH_SHORT);
+            toast.show();
         });
     }
 

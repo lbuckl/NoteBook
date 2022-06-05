@@ -65,7 +65,22 @@ public class ItemFragmentNotes extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyItemRecyclerViewAdapter(PlaceholderContent.ITEMS));
+
+            PlaceholderContent placeholderContent = new PlaceholderContent();
+            //ковыряем адаптер
+            try{
+                for(int i=1;i<=MainActivity.notes.getNotesSize();i++){
+                    placeholderContent.addItem(i,
+                            MainActivity.notes.getNameForId(i-1),
+                            MainActivity.notes.getNoteForId(i-1));
+                }
+            }catch (IndexOutOfBoundsException e){
+                e.printStackTrace();
+            }
+
+
+            placeholderContent.setCount(MainActivity.notes.getNotesSize()); // передаём количество элементов
+            recyclerView.setAdapter(new MyItemRecyclerViewAdapter(placeholderContent.getItems()));
         }
 
         return view;

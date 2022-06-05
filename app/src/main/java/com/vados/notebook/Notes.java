@@ -1,27 +1,29 @@
 package com.vados.notebook;
 
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.PriorityQueue;
 
 public class Notes {
 
-    private ArrayList<String> noteNames;
-    private ArrayList<Date> createDate;
-    private ArrayList<String> notes;
+    private ArrayList<String> noteNames = new ArrayList<>();
+    private ArrayList<Date> createDate = new ArrayList<>();
+    private ArrayList<String> notes = new ArrayList<>();
     GregorianCalendar gcalendar = new GregorianCalendar();
 
     //Создать запись только по имени
     public void addNewNote(String name){
-
+        this.noteNames.add(name);
+        this.notes.add("");
+        this.createDate.add(gcalendar.getTime());
     }
 
     //Создать запись только по имени и значению
     public void addNewNote(String name, String note){
-        noteNames.add(name);
-        notes.add(note);
-        gcalendar.getTime();
+        this.noteNames.add(name);
+        this.notes.add(note);
+        this.createDate.add(gcalendar.getTime());
     }
 
     //Получаем число заметок
@@ -51,16 +53,16 @@ public class Notes {
 
     //записать Имя по id
     public void setNoteName(String name){
-        noteNames.add(name);
+        this.noteNames.add(name);
     }
 
     //записать Значение по id
     public void setNote(String note){
-        notes.add(note);
+        this.notes.add(note);
     }
     //записать Дату по id
     public void setNoteDate(Date date){
-        createDate.add(date);
+        this.createDate.add(date);
     }
 
 }

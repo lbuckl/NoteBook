@@ -16,29 +16,42 @@ public class PlaceholderContent {
     /**
      * An array of sample (placeholder) items.
      */
-    public static final List<PlaceholderItem> ITEMS = new ArrayList<PlaceholderItem>();
+    public static final List<PlaceholderItem> ITEMS = new ArrayList<>();
 
     /**
      * A map of sample (placeholder) items, by ID.
      */
-    public static final Map<String, PlaceholderItem> ITEM_MAP = new HashMap<String, PlaceholderItem>();
+    public static final Map<String, PlaceholderItem> ITEM_MAP = new HashMap<>();
 
-    private static final int COUNT = 26;
+    private static int COUNT = 1;
 
-    static {
+    public void setCount(int count){
+        COUNT = count;
+    }
+
+    /*{
         // Add some sample items.
         for (int i = 1; i <= COUNT; i++) {
             addItem(createPlaceholderItem(i));
         }
-    }
+    }*/
 
-    private static void addItem(PlaceholderItem item) {
+    public void addItem(PlaceholderItem item) {
         ITEMS.add(item);
         ITEM_MAP.put(item.id, item);
     }
 
-    private static PlaceholderItem createPlaceholderItem(int position) {
-        return new PlaceholderItem(String.valueOf(position), "Item " + position, makeDetails(position));
+    public List<PlaceholderItem> getItems() {
+        return ITEMS;
+    }
+
+    public void addItem(int position, String noteName, String note) {
+        ITEMS.add(new PlaceholderItem(String.valueOf(position), noteName, note));
+        ITEM_MAP.put(new PlaceholderItem(String.valueOf(position), noteName, note).id, new PlaceholderItem(String.valueOf(position), noteName, note));
+    }
+
+    public PlaceholderItem createPlaceholderItem(int position, String noteName, String note) {
+        return new PlaceholderItem(String.valueOf(position), noteName, note);
     }
 
     private static String makeDetails(int position) {

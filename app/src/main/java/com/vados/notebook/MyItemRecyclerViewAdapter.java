@@ -25,14 +25,18 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
         mValues = items;
     }
 
-
+    //метод вызывается для создания объекта ViewHolder,
+    // в конструктор которого необходимо передать созданный View-компонент,
+    // с которым в дальнейшем будут связываться java объекты
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        return new ViewHolder(FragmentItemNotesBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
-
+        return new ViewHolder(FragmentItemNotesBinding
+                .inflate(LayoutInflater
+                        .from(parent.getContext()), parent, false));
     }
 
+    //метод отвечает за связь java объекта и View
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
@@ -45,6 +49,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
         return mValues.size();
     }
 
+    //предоставит нам доступ к View-компонентам
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final TextView mIdView;
         public final TextView mContentView;
