@@ -23,19 +23,6 @@ public class PlaceholderContent {
      */
     public static final Map<String, PlaceholderItem> ITEM_MAP = new HashMap<>();
 
-    private static int COUNT = 1;
-
-    public void setCount(int count){
-        COUNT = count;
-    }
-
-    /*{
-        // Add some sample items.
-        for (int i = 1; i <= COUNT; i++) {
-            addItem(createPlaceholderItem(i));
-        }
-    }*/
-
     public void addItem(PlaceholderItem item) {
         ITEMS.add(item);
         ITEM_MAP.put(item.id, item);
@@ -48,10 +35,6 @@ public class PlaceholderContent {
     public void addItem(int position, String noteName, String note) {
         ITEMS.add(new PlaceholderItem(String.valueOf(position), noteName, note));
         ITEM_MAP.put(new PlaceholderItem(String.valueOf(position), noteName, note).id, new PlaceholderItem(String.valueOf(position), noteName, note));
-    }
-
-    public PlaceholderItem createPlaceholderItem(int position, String noteName, String note) {
-        return new PlaceholderItem(String.valueOf(position), noteName, note);
     }
 
     private static String makeDetails(int position) {

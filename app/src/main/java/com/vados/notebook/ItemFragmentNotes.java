@@ -26,21 +26,10 @@ public class ItemFragmentNotes extends Fragment {
     private int mColumnCount = 1;
 
     /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
+     * Обязательный элемент, не удалять!!!
      */
     public ItemFragmentNotes() {
     }
-
-    // TODO: Customize parameter initialization
-    /*@SuppressWarnings("unused")
-    public static ItemFragmentNotes newInstance(int columnCount) {
-        ItemFragmentNotes fragment = new ItemFragmentNotes();
-        Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
-        fragment.setArguments(args);
-        return fragment;
-    }*/
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -85,11 +74,8 @@ public class ItemFragmentNotes extends Fragment {
             }catch (IndexOutOfBoundsException e){
                 e.printStackTrace();
             }
-
-            //placeholderContent.setCount(MainActivity.notes.getNotesSize()); // передаём количество элементов
             recyclerView.setAdapter(new MyItemRecyclerViewAdapter(placeholderContent.getItems())); //передаём
         }
-
         return view;
     }
 
