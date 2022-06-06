@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     private Button button_add;
     private Button button_settings;
     public static Notes notes = new Notes();
+    public static FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +28,9 @@ public class MainActivity extends AppCompatActivity {
     private void Initialization(){
         button_add = findViewById(R.id.button_add);
         button_settings = findViewById(R.id.button_settings);
-        getSupportFragmentManager()
+
+        fragmentManager =  getSupportFragmentManager();
+        fragmentManager
                 .beginTransaction()
                 .replace(R.id.fragment_container,new ItemFragmentNotes())
                 .commit();
@@ -37,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
         button_add.setOnClickListener(v -> {
             //открываем фрагмент с добавлением/изменением заметки
-            getSupportFragmentManager()
+            fragmentManager
                     .beginTransaction()
                     .replace(R.id.fragment_container_note,new EnterNoteFragment())
                     .addToBackStack("")
@@ -47,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         button_settings.setOnClickListener(v -> {
             //открываем фрагмент с настройками
             Toast toast = Toast.makeText(getApplicationContext(),
-                    notes.getNameForId(notes.getNotesSize()-1), Toast.LENGTH_SHORT);
+                    String.valueOf(notes.getNotesSize()), Toast.LENGTH_SHORT);
             toast.show();
         });
 
