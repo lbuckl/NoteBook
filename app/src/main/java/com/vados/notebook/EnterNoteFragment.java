@@ -71,6 +71,10 @@ public class EnterNoteFragment extends Fragment {
             String nName = textInput_NoteName.getText().toString();
             String nValue = textInput_Note.getText().toString();
             MainActivity.notes.addNewNote(nName, nValue);
+
+            fragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container,new ItemFragmentNotes())
+                    .commit();
             //fragmentTransaction.remove(new EnterNoteFragment()).commit();
         });
     }
