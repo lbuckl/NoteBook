@@ -66,11 +66,6 @@ public class ItemFragmentNotes extends Fragment {
                                 MainActivity.notes.getNoteForId(i - 1));
                     }
                 }
-                else {
-                    placeholderContent.addItem(1,
-                            "",
-                            "");
-                }
             }catch (IndexOutOfBoundsException e){
                 e.printStackTrace();
             }
