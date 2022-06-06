@@ -16,6 +16,8 @@ public class MainActivity extends AppCompatActivity {
     private Button button_settings;
     public static Notes notes = new Notes();
     public static FragmentManager fragmentManager;
+    public static ItemFragmentNotes itemFragmentNotes = new ItemFragmentNotes();
+    public static EnterNoteFragment enterNoteFragment = new EnterNoteFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         fragmentManager =  getSupportFragmentManager();
         fragmentManager
                 .beginTransaction()
-                .replace(R.id.fragment_container,new ItemFragmentNotes())
+                .replace(R.id.fragment_container,itemFragmentNotes)
                 .commit();
     }
 
@@ -42,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
             //открываем фрагмент с добавлением/изменением заметки
             fragmentManager
                     .beginTransaction()
-                    .replace(R.id.fragment_container_note,new EnterNoteFragment())
+                    .replace(R.id.fragment_container,enterNoteFragment)
                     .addToBackStack("")
                     .commit();
         });

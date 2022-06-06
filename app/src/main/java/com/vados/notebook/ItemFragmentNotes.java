@@ -56,6 +56,7 @@ public class ItemFragmentNotes extends Fragment {
             }
 
             PlaceholderContent placeholderContent = new PlaceholderContent();
+
             //ковыряем адаптер
             try{
                 int noteSize = MainActivity.notes.getNotesSize();
@@ -69,6 +70,7 @@ public class ItemFragmentNotes extends Fragment {
             }catch (IndexOutOfBoundsException e){
                 e.printStackTrace();
             }
+
             recyclerView.setAdapter(new MyItemRecyclerViewAdapter(placeholderContent.getItems())); //передаём
         }
         return view;
