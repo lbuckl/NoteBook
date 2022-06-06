@@ -1,6 +1,7 @@
 package com.vados.notebook;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -24,9 +25,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void Initialization(){
-        notes.addNewNote("one");
-        notes.addNewNote("two");
-        notes.addNewNote("three");
         button_add = findViewById(R.id.button_add);
         button_settings = findViewById(R.id.button_settings);
         getSupportFragmentManager()
@@ -49,10 +47,9 @@ public class MainActivity extends AppCompatActivity {
         button_settings.setOnClickListener(v -> {
             //открываем фрагмент с настройками
             Toast toast = Toast.makeText(getApplicationContext(),
-                    notes.getNameForId(1), Toast.LENGTH_SHORT);
+                    notes.getNameForId(notes.getNotesSize()-1), Toast.LENGTH_SHORT);
             toast.show();
         });
-
 
     }
 

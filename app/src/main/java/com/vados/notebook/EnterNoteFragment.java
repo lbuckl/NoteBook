@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class EnterNoteFragment extends Fragment {
 
@@ -21,8 +22,8 @@ public class EnterNoteFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";*/
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    /*private String mParam1;
+    private String mParam2;*/
 
     /*public EnterNoteFragment() {
         // Required empty public constructor
@@ -63,8 +64,14 @@ public class EnterNoteFragment extends Fragment {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         Button button_apply = view.findViewById(R.id.button_apply);
+        TextView textInput_NoteName = view.findViewById(R.id.textInput_noteName);
+        TextView textInput_Note = view.findViewById(R.id.textInput_note);
+
         button_apply.setOnClickListener(v -> {
-            fragmentTransaction.remove(new EnterNoteFragment()).commit();
+            String nName = textInput_NoteName.getText().toString();
+            String nValue = textInput_Note.getText().toString();
+            MainActivity.notes.addNewNote(nName, nValue);
+            //fragmentTransaction.remove(new EnterNoteFragment()).commit();
         });
     }
 }
