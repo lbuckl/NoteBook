@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import com.vados.notebook.placeholder.PlaceholderContent;
 
@@ -56,7 +57,8 @@ public class ItemFragmentNotes extends Fragment {
             }
 
             PlaceholderContent placeholderContent = new PlaceholderContent();
-
+            placeholderContent.clearItems();
+            recyclerView.setAdapter(new MyItemRecyclerViewAdapter(placeholderContent.getItems()));
             //ковыряем адаптер
             try{
                 int noteSize = MainActivity.notes.getNotesSize();
@@ -70,8 +72,8 @@ public class ItemFragmentNotes extends Fragment {
             }catch (IndexOutOfBoundsException e){
                 e.printStackTrace();
             }
-
             recyclerView.setAdapter(new MyItemRecyclerViewAdapter(placeholderContent.getItems())); //передаём
+
         }
         return view;
     }

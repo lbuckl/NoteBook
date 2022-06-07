@@ -51,14 +51,15 @@ public class Notes {
         return notes.get(id);
     }
 
-    //записать Имя по id
-    public void setNoteName(String name){
-        this.noteNames.add(name);
-    }
+    //записать имя и значение по id
+    public void setNote(int id,String name, String note){
+        try{
+            this.notes.set(id-1,note);
+            this.noteNames.set(id-1,name);
+        }catch(IndexOutOfBoundsException e){
+            e.printStackTrace();
+        }
 
-    //записать Значение по id
-    public void setNote(String note){
-        this.notes.add(note);
     }
     //записать Дату по id
     public void setNoteDate(Date date){

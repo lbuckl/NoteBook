@@ -13,9 +13,7 @@ import java.util.Map;
  */
 public class PlaceholderContent {
 
-    /**
-     * An array of sample (placeholder) items.
-     */
+    //Список элементов
     public static final List<PlaceholderItem> ITEMS = new ArrayList<>();
 
     /**
@@ -25,7 +23,7 @@ public class PlaceholderContent {
 
     public void addItem(PlaceholderItem item) {
         ITEMS.add(item);
-        ITEM_MAP.put(item.id, item);
+        //ITEM_MAP.put(item.id, item);
     }
 
     public List<PlaceholderItem> getItems() {
@@ -33,17 +31,13 @@ public class PlaceholderContent {
     }
 
     public void addItem(int position, String noteName, String note) {
-        ITEMS.add(new PlaceholderItem(String.valueOf(position), noteName, note));
-        ITEM_MAP.put(new PlaceholderItem(String.valueOf(position), noteName, note).id, new PlaceholderItem(String.valueOf(position), noteName, note));
+        ITEMS.add(new PlaceholderItem(position, noteName, note));
+        //ITEM_MAP.put(new PlaceholderItem(String.valueOf(position), noteName, note)
+        // .id, new PlaceholderItem(String.valueOf(position), noteName, note));
     }
 
-    private static String makeDetails(int position) {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Details about Item: ").append(position);
-        for (int i = 0; i < position; i++) {
-            builder.append("\nMore details information here.");
-        }
-        return builder.toString();
+    public void clearItems(){
+        ITEMS.clear();
     }
 
     /**
@@ -51,11 +45,13 @@ public class PlaceholderContent {
      */
     public static class PlaceholderItem {
         public final String id;
+        public int intDI;
         public final String content;
         public final String details;
 
-        public PlaceholderItem(String id, String content, String details) {
-            this.id = id;
+        public PlaceholderItem(int id, String content, String details) {
+            intDI = id;
+            this.id = String.valueOf(id);
             this.content = content;
             this.details = details;
         }

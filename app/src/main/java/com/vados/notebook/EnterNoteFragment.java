@@ -6,7 +6,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,10 +23,15 @@ public class EnterNoteFragment extends Fragment {
     // TODO: Rename and change types of parameters
     /*private String mParam1;
     private String mParam2;*/
+    boolean replace = false;
+    int replaseID = 0;
 
-    /*public EnterNoteFragment() {
-        // Required empty public constructor
-    }*/
+    public EnterNoteFragment() {
+    }
+
+    public EnterNoteFragment(int id){
+        this.replaseID = id;
+    }
 
     // TODO: Rename and change types and number of parameters
     /*public static EnterNoteFragment newInstance(String param1, String param2) {
@@ -61,21 +65,28 @@ public class EnterNoteFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         Button button_apply = view.findViewById(R.id.button_apply);
         TextView textInput_NoteName = view.findViewById(R.id.textInput_noteName);
         TextView textInput_Note = view.findViewById(R.id.textInput_note);
 
+        if (replaseID > 0){
+            textInput_NoteName.setText(MainActivity.notes.getNameForId(replaseID-1));
+            textInput_Note.setText(MainActivity.notes.getNoteForId(replaseID-1));
+        }
+
         button_apply.setOnClickListener(v -> {
             String nName = textInput_NoteName.getText().toString();
             String nValue = textInput_Note.getText().toString();
-            MainActivity.notes.addNewNote(nName, nValue);
 
+            if (replaseID > 0){
+                MainActivity.notes.setNote(replaseID,nName,nValue);
+            }else{
+                MainActivity.notes.addNewNote(nName, nValue);
+            }
             fragmentManager.beginTransaction()
                     .replace(R.id.fragment_container,MainActivity.itemFragmentNotes)
                     .commit();
-            //fragmentTransaction.remove(new EnterNoteFragment()).commit();
         });
     }
 }

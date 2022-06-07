@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
     public static Notes notes = new Notes();
     public static FragmentManager fragmentManager;
     public static ItemFragmentNotes itemFragmentNotes = new ItemFragmentNotes();
-    public static EnterNoteFragment enterNoteFragment = new EnterNoteFragment();
+    public static EnterNoteFragment enterNoteFragment = new EnterNoteFragment(0);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
             fragmentManager
                     .beginTransaction()
                     .replace(R.id.fragment_container,enterNoteFragment)
-                    .addToBackStack("")
+                    .addToBackStack("EnterFragment")
                     .commit();
         });
 
