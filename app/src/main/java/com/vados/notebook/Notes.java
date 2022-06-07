@@ -17,7 +17,7 @@ public class Notes {
     private ArrayList<String> notes = new ArrayList<>();
     Calendar gcalendar = new GregorianCalendar();
     {
-        gcalendar.add(Calendar.HOUR,5);
+        //gcalendar.add(Calendar.HOUR,5);
     }
 
     //Создать запись только по имени

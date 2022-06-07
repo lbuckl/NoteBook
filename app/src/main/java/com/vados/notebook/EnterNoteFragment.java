@@ -71,7 +71,7 @@ public class EnterNoteFragment extends Fragment {
         //Проверяем на поворот экрана в горизонталь. true - значи повёрнут
         isLandscape = getResources().getConfiguration().orientation ==
                 Configuration.ORIENTATION_LANDSCAPE;
-        gcalendar.add(Calendar.HOUR,5);
+        //gcalendar.add(Calendar.HOUR,5);
         return view;
     }
 
