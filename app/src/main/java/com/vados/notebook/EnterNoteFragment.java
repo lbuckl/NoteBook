@@ -87,6 +87,7 @@ public class EnterNoteFragment extends Fragment {
             fragmentManager.beginTransaction()
                     .replace(R.id.fragment_container,MainActivity.itemFragmentNotes)
                     .commit();
+
         });
     }
 }

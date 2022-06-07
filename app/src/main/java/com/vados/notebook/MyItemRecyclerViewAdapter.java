@@ -46,8 +46,9 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
 
         holder.itemView.setOnClickListener(v -> {
             FragmentManager fragmentManager = MainActivity.fragmentManager;
+            EnterNoteFragment enterNoteFragmentRep = new EnterNoteFragment(mValues.get(position).intDI);
             fragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container,new EnterNoteFragment(mValues.get(position).intDI))
+                    .replace(R.id.fragment_container,enterNoteFragmentRep)
                     .addToBackStack("NoteFragment")
                     .commit();
         });

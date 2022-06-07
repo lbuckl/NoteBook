@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
     public static Notes notes = new Notes();
     public static FragmentManager fragmentManager;
     public static ItemFragmentNotes itemFragmentNotes = new ItemFragmentNotes();
-    public static EnterNoteFragment enterNoteFragment = new EnterNoteFragment(0);
+    public static EnterNoteFragment enterNoteFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
         button_add.setOnClickListener(v -> {
             //открываем фрагмент с добавлением/изменением заметки
+            enterNoteFragment = new EnterNoteFragment(0);
             fragmentManager
                     .beginTransaction()
                     .replace(R.id.fragment_container,enterNoteFragment)
