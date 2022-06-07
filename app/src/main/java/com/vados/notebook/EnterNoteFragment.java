@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import android.content.res.Configuration;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +25,7 @@ public class EnterNoteFragment extends Fragment {
     /*private String mParam1;
     private String mParam2;*/
     boolean replace = false;
+    boolean isLandscape;
     int replaseID = 0;
 
     public EnterNoteFragment() {
@@ -58,6 +60,10 @@ public class EnterNoteFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_enter_note, container, false);
 
+        //Проверяем на поворот экрана в горизонталь. true - значи повёрнут
+        isLandscape = getResources().getConfiguration().orientation ==
+                Configuration.ORIENTATION_LANDSCAPE;
+
         return view;
     }
 
@@ -91,16 +97,34 @@ public class EnterNoteFragment extends Fragment {
             }else{
                 MainActivity.notes.addNewNote(nName, nValue);
             }
-            fragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container,MainActivity.itemFragmentNotes)
-                    .commit();
+
+            if (!isLandscape){
+                fragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container,MainActivity.itemFragmentNotes)
+                        .commit();
+            }else{
+                fragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container_note,new EmptyFragment())
+                        .replace(R.id.fragment_container, new ItemFragmentNotes())
+                        .commit();
+            }
+
+
         });
 
         button_delete.setOnClickListener(v -> {
             MainActivity.notes.deleteNoteForId(replaseID);
-            fragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container,MainActivity.itemFragmentNotes)
-                    .commit();
+
+            if (!isLandscape){
+                fragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container,MainActivity.itemFragmentNotes)
+                        .commit();
+            }else{
+                fragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container_note,new EmptyFragment())
+                        .replace(R.id.fragment_container, new ItemFragmentNotes())
+                        .commit();
+            }
         });
     }
 }

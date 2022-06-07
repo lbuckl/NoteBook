@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.res.Configuration;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,10 +48,17 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
         holder.itemView.setOnClickListener(v -> {
             FragmentManager fragmentManager = MainActivity.fragmentManager;
             EnterNoteFragment enterNoteFragmentRep = new EnterNoteFragment(mValues.get(position).intDI);
-            fragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container,enterNoteFragmentRep)
-                    .addToBackStack("NoteFragment")
-                    .commit();
+            if (!MainActivity.isLandscape){
+                fragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container,enterNoteFragmentRep)
+                        .addToBackStack("NoteFragment")
+                        .commit();
+            }else{
+                fragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container_note,enterNoteFragmentRep)
+                        .addToBackStack("NoteFragment")
+                        .commit();
+            }
         });
     }
 

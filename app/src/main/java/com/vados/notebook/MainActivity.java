@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import android.content.res.Configuration;
 
 import android.os.Bundle;
 import android.widget.Button;
@@ -18,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     public static FragmentManager fragmentManager;
     public static ItemFragmentNotes itemFragmentNotes = new ItemFragmentNotes();
     public static EnterNoteFragment enterNoteFragment;
+    public static boolean isLandscape;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     private void Initialization(){
         button_add = findViewById(R.id.button_add);
         button_settings = findViewById(R.id.button_settings);
+        isLandscape = getResources().getConfiguration().orientation ==
+                Configuration.ORIENTATION_LANDSCAPE;
 
         fragmentManager =  getSupportFragmentManager();
         fragmentManager
@@ -42,12 +46,23 @@ public class MainActivity extends AppCompatActivity {
 
         button_add.setOnClickListener(v -> {
             //открываем фрагмент с добавлением/изменением заметки
+
             enterNoteFragment = new EnterNoteFragment(0);
-            fragmentManager
-                    .beginTransaction()
-                    .replace(R.id.fragment_container,enterNoteFragment)
-                    .addToBackStack("EnterFragment")
-                    .commit();
+            if (isLandscape) {
+                fragmentManager
+                        .beginTransaction()
+                        .replace(R.id.fragment_container_note,enterNoteFragment)
+                        .addToBackStack("EnterFragment")
+                        .commit();
+            }else{
+                fragmentManager
+                        .beginTransaction()
+                        .replace(R.id.fragment_container,enterNoteFragment)
+                        .addToBackStack("EnterFragment")
+                        .commit();
+            }
+
+
         });
 
         button_settings.setOnClickListener(v -> {
