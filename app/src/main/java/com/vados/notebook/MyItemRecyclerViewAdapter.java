@@ -44,6 +44,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
         holder.mItem = mValues.get(position);
         holder.mIdView.setText(mValues.get(position).id);
         holder.mContentView.setText(mValues.get(position).content);
+        holder.mDateView.setText(String.valueOf(mValues.get(position).noteDate));
 
         holder.itemView.setOnClickListener(v -> {
             FragmentManager fragmentManager = MainActivity.fragmentManager;
@@ -71,12 +72,14 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final TextView mIdView;
         public final TextView mContentView;
+        public final TextView mDateView;
         public PlaceholderItem mItem;
 
         public ViewHolder(FragmentItemNotesBinding binding) {
             super(binding.getRoot());
             mIdView = binding.itemNumber;
             mContentView = binding.content;
+            mDateView = binding.date;
         }
 
         @Override

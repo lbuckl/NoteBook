@@ -48,7 +48,7 @@ public class Notes {
     }
 
     //получить Дату и время по id
-    public Date getTimeForId(int id){
+    public Date getDateForId(int id){
         return createDate.get(id);
     }
 

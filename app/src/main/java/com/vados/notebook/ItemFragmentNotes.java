@@ -66,7 +66,8 @@ public class ItemFragmentNotes extends Fragment {
                     for (int i = 1; i <= noteSize; i++) {
                         placeholderContent.addItem(i,
                                 MainActivity.notes.getNameForId(i - 1),
-                                MainActivity.notes.getNoteForId(i - 1));
+                                MainActivity.notes.getNoteForId(i - 1),
+                                MainActivity.notes.getDateForId(i - 1));
                     }
                 }
             }catch (IndexOutOfBoundsException e){
