@@ -1,5 +1,7 @@
 package com.vados.notebook;
 
+import android.app.DatePickerDialog;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,7 +14,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class EnterNoteFragment extends Fragment {
 
@@ -27,6 +34,9 @@ public class EnterNoteFragment extends Fragment {
     boolean replace = false;
     boolean isLandscape;
     int replaseID = 0;
+    Date selectDate = null;
+    Calendar gcalendar = new GregorianCalendar();
+
 
     public EnterNoteFragment() {
     }
@@ -40,7 +50,6 @@ public class EnterNoteFragment extends Fragment {
         EnterNoteFragment fragment = new EnterNoteFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }*/
@@ -51,7 +60,6 @@ public class EnterNoteFragment extends Fragment {
 
         /*if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
         }*/
     }
 
@@ -63,7 +71,7 @@ public class EnterNoteFragment extends Fragment {
         //Проверяем на поворот экрана в горизонталь. true - значи повёрнут
         isLandscape = getResources().getConfiguration().orientation ==
                 Configuration.ORIENTATION_LANDSCAPE;
-
+        gcalendar.add(Calendar.HOUR,5);
         return view;
     }
 
@@ -74,12 +82,15 @@ public class EnterNoteFragment extends Fragment {
 
         Button button_apply = view.findViewById(R.id.button_apply);
         Button button_delete = view.findViewById(R.id.button_delete);
+        Button button_selectDate = view.findViewById(R.id.button_selectDate);
         TextView textInput_NoteName = view.findViewById(R.id.textInput_noteName);
         TextView textInput_Note = view.findViewById(R.id.textInput_note);
+        TextView textView_Date = view.findViewById(R.id.textView_date);
 
         if (replaseID > 0){
             textInput_NoteName.setText(MainActivity.notes.getNameForId(replaseID-1));
             textInput_Note.setText(MainActivity.notes.getNoteForId(replaseID-1));
+            textView_Date.setText(String.valueOf(MainActivity.notes.getDateForId(replaseID-1)));
             button_delete.setVisibility(View.VISIBLE);
             button_delete.setClickable(true);
         }
@@ -93,10 +104,13 @@ public class EnterNoteFragment extends Fragment {
             String nValue = textInput_Note.getText().toString();
 
             if (replaseID > 0){
-                MainActivity.notes.setNote(replaseID,nName,nValue);
+                if (selectDate != null) MainActivity.notes.setNote(replaseID,nName,nValue,selectDate);
+                else MainActivity.notes.setNote(replaseID,nName,nValue);
             }else{
                 MainActivity.notes.addNewNote(nName, nValue);
             }
+
+            selectDate = null;
 
             if (!isLandscape){
                 fragmentManager.beginTransaction()
@@ -125,6 +139,22 @@ public class EnterNoteFragment extends Fragment {
                         .replace(R.id.fragment_container, new ItemFragmentNotes())
                         .commit();
             }
+        });
+
+        button_selectDate.setOnClickListener(v -> {
+            int YEAR = gcalendar.getWeekYear();
+            int MONTH = gcalendar.DAY_OF_MONTH+1;
+            int DAY = gcalendar.DAY_OF_WEEK_IN_MONTH;
+            gcalendar.set(YEAR,MONTH,DAY);
+
+            Context context = view.getContext();
+            DatePickerDialog datePickerDialog = new DatePickerDialog(context,
+                    (view1, year, month, dayOfMonth) -> {
+                        gcalendar.set(year,month,dayOfMonth);
+                        selectDate = gcalendar.getTime();
+                        textView_Date.setText(String.valueOf(selectDate));
+                    },YEAR,MONTH,DAY);
+            datePickerDialog.show();
         });
     }
 }

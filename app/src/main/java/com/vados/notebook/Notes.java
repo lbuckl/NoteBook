@@ -1,16 +1,24 @@
 package com.vados.notebook;
 
+import android.icu.text.DateFormat;
+import android.icu.text.SimpleDateFormat;
+
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.PriorityQueue;
+import java.util.TimeZone;
 
 public class Notes {
 
     private ArrayList<String> noteNames = new ArrayList<>();
     private ArrayList<Date> createDate = new ArrayList<>();
     private ArrayList<String> notes = new ArrayList<>();
-    GregorianCalendar gcalendar = new GregorianCalendar();
+    Calendar gcalendar = new GregorianCalendar();
+    {
+        gcalendar.add(Calendar.HOUR,5);
+    }
 
     //Создать запись только по имени
     public void addNewNote(String name){
@@ -65,8 +73,19 @@ public class Notes {
         }catch(IndexOutOfBoundsException e){
             e.printStackTrace();
         }
-
     }
+
+    //записать имя, значение и время по id
+    public void setNote(int id,String name, String note, Date date){
+        try{
+            this.notes.set(id-1,note);
+            this.noteNames.set(id-1,name);
+            this.createDate.set(id-1,date);
+        }catch(IndexOutOfBoundsException e){
+            e.printStackTrace();
+        }
+    }
+
     //записать Дату по id
     public void setNoteDate(Date date){
         this.createDate.add(date);
