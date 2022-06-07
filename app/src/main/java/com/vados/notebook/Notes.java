@@ -26,6 +26,11 @@ public class Notes {
         this.createDate.add(gcalendar.getTime());
     }
 
+    public void deleteNoteForId(int id){
+        noteNames.remove(id-1);
+        notes.remove(id-1);
+    }
+
     //Получаем число заметок
     public int getNotesSize(){
         return noteNames.size();

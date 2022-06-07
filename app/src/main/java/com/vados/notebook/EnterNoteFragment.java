@@ -67,12 +67,19 @@ public class EnterNoteFragment extends Fragment {
         FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
 
         Button button_apply = view.findViewById(R.id.button_apply);
+        Button button_delete = view.findViewById(R.id.button_delete);
         TextView textInput_NoteName = view.findViewById(R.id.textInput_noteName);
         TextView textInput_Note = view.findViewById(R.id.textInput_note);
 
         if (replaseID > 0){
             textInput_NoteName.setText(MainActivity.notes.getNameForId(replaseID-1));
             textInput_Note.setText(MainActivity.notes.getNoteForId(replaseID-1));
+            button_delete.setVisibility(View.VISIBLE);
+            button_delete.setClickable(true);
+        }
+        else {
+            button_delete.setVisibility(View.INVISIBLE);
+            button_delete.setClickable(false);
         }
 
         button_apply.setOnClickListener(v -> {
@@ -87,7 +94,13 @@ public class EnterNoteFragment extends Fragment {
             fragmentManager.beginTransaction()
                     .replace(R.id.fragment_container,MainActivity.itemFragmentNotes)
                     .commit();
+        });
 
+        button_delete.setOnClickListener(v -> {
+            MainActivity.notes.deleteNoteForId(replaseID);
+            fragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container,MainActivity.itemFragmentNotes)
+                    .commit();
         });
     }
 }
