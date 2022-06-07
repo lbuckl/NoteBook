@@ -29,6 +29,7 @@ public class Notes {
     public void deleteNoteForId(int id){
         noteNames.remove(id-1);
         notes.remove(id-1);
+        createDate.remove(id-1);
     }
 
     //Получаем число заметок

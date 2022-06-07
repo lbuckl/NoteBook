@@ -21,17 +21,13 @@ public class PlaceholderContent {
      */
     public static final Map<String, PlaceholderItem> ITEM_MAP = new HashMap<>();
 
-    public void addItem(PlaceholderItem item) {
-        ITEMS.add(item);
-        //ITEM_MAP.put(item.id, item);
-    }
-
     public List<PlaceholderItem> getItems() {
         return ITEMS;
     }
 
     public void addItem(int position, String noteName, String note) {
         ITEMS.add(new PlaceholderItem(position, noteName, note));
+
         //ITEM_MAP.put(new PlaceholderItem(String.valueOf(position), noteName, note)
         // .id, new PlaceholderItem(String.valueOf(position), noteName, note));
     }
