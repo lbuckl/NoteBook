@@ -1,24 +1,16 @@
 package com.vados.notebook;
-
-import android.icu.text.DateFormat;
-import android.icu.text.SimpleDateFormat;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.PriorityQueue;
-import java.util.TimeZone;
+
 
 public class Notes {
 
-    private ArrayList<String> noteNames = new ArrayList<>();
-    private ArrayList<Date> createDate = new ArrayList<>();
-    private ArrayList<String> notes = new ArrayList<>();
+    private final ArrayList<String> noteNames = new ArrayList<>();
+    private final ArrayList<Date> createDate = new ArrayList<>();
+    private final ArrayList<String> notes = new ArrayList<>();
     Calendar gcalendar = new GregorianCalendar();
-    {
-        //gcalendar.add(Calendar.HOUR,5);
-    }
 
     //Создать запись только по имени
     public void addNewNote(String name){

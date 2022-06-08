@@ -1,5 +1,9 @@
 package com.vados.notebook.placeholder;
 
+import androidx.annotation.NonNull;
+
+import com.vados.notebook.FormatDate;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -27,7 +31,7 @@ public class PlaceholderContent {
     }
 
     public void addItem(int position, String noteName, String note, Date noteDate) {
-        ITEMS.add(new PlaceholderItem(position, noteName, note,noteDate));
+        ITEMS.add(new PlaceholderItem(position, noteName, note, noteDate));
 
         //ITEM_MAP.put(new PlaceholderItem(String.valueOf(position), noteName, note)
         // .id, new PlaceholderItem(String.valueOf(position), noteName, note));
@@ -47,6 +51,7 @@ public class PlaceholderContent {
         public final String details;
         public final Date noteDate;
 
+
         public PlaceholderItem(int id, String content, String details, Date date) {
             this.noteDate = date;
             this.intDI = id;
@@ -55,6 +60,7 @@ public class PlaceholderContent {
             this.details = details;
         }
 
+        @NonNull
         @Override
         public String toString() {
             return content;

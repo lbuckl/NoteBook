@@ -36,7 +36,7 @@ public class EnterNoteFragment extends Fragment {
     int replaseID = 0;
     Date selectDate = null;
     Calendar gcalendar = new GregorianCalendar();
-
+    FormatDate formatDate = new FormatDate();
 
     public EnterNoteFragment() {
     }
@@ -90,7 +90,7 @@ public class EnterNoteFragment extends Fragment {
         if (replaseID > 0){
             textInput_NoteName.setText(MainActivity.notes.getNameForId(replaseID-1));
             textInput_Note.setText(MainActivity.notes.getNoteForId(replaseID-1));
-            textView_Date.setText(String.valueOf(MainActivity.notes.getDateForId(replaseID-1)));
+            textView_Date.setText(formatDate.getCustomStringDate(MainActivity.notes.getDateForId(replaseID-1)));
             button_delete.setVisibility(View.VISIBLE);
             button_delete.setClickable(true);
         }
@@ -122,8 +122,6 @@ public class EnterNoteFragment extends Fragment {
                         .replace(R.id.fragment_container, new ItemFragmentNotes())
                         .commit();
             }
-
-
         });
 
         button_delete.setOnClickListener(v -> {
@@ -152,7 +150,7 @@ public class EnterNoteFragment extends Fragment {
                     (view1, year, month, dayOfMonth) -> {
                         gcalendar.set(year,month,dayOfMonth);
                         selectDate = gcalendar.getTime();
-                        textView_Date.setText(String.valueOf(selectDate));
+                        textView_Date.setText(formatDate.getCustomStringDate(selectDate));
                     },YEAR,MONTH,DAY);
             datePickerDialog.show();
         });
