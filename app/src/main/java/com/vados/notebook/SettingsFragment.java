@@ -119,26 +119,32 @@ public class SettingsFragment extends Fragment {
         });
 
         //Спинер изменения Стиля
-        /*spinner_them.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinner_them.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                them = spinner_them.getSelectedItemPosition();
-                switch (them){
-                    case 0:
-                        sStyle = "Light";
-                        break;
+                int themID = spinner_them.getSelectedItemPosition();
+                switch (themID){
                     case 1:
-                        sStyle = "Dark";
+                        context.setTheme(getAppTheme(1));
+                        //restartActivity();
+                        break;
+                    case 2:
+                        context.setTheme(getAppTheme(2));
+                        //restartActivity();
+                        break;
+                    case 3:
+                        context.setTheme(getAppTheme(3));
+                        //restartActivity();
                         break;
                 }
-                textView_style.setText(sStyle);
+
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        });*/
+        });
     }
 
     // Сетаем текущий язык в текстовое поле
