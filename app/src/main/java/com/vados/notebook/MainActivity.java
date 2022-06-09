@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     public static FragmentManager fragmentManager;
     public static ItemFragmentNotes itemFragmentNotes = new ItemFragmentNotes();
     public static EnterNoteFragment enterNoteFragment;
+    public static SettingsFragment settingsFragment;
     public static boolean isLandscape;
 
     @Override
@@ -67,9 +68,20 @@ public class MainActivity extends AppCompatActivity {
 
         button_settings.setOnClickListener(v -> {
             //открываем фрагмент с настройками
-            Toast toast = Toast.makeText(getApplicationContext(),
-                    String.valueOf(notes.getNotesSize()), Toast.LENGTH_SHORT);
-            toast.show();
+            settingsFragment = new SettingsFragment();
+            if (isLandscape) {
+                fragmentManager
+                        .beginTransaction()
+                        .replace(R.id.fragment_container_note,settingsFragment)
+                        .addToBackStack("EnterFragment")
+                        .commit();
+            }else{
+                fragmentManager
+                        .beginTransaction()
+                        .replace(R.id.fragment_container,settingsFragment)
+                        .addToBackStack("EnterFragment")
+                        .commit();
+            }
         });
 
     }
