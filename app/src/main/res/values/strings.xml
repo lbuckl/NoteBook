@@ -8,7 +8,8 @@
     <string name="apply">Применить</string>
     <string name="delete">Удалить</string>
     <string name="select">Выбрать</string>
-
+    <string name="Lang">Язык</string>
+    <string name="Them">Тема</string>
 
 
 </resources>
