@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     public static EnterNoteFragment enterNoteFragment;
     public static SettingsFragment settingsFragment;
     public static boolean isLandscape;
+    public static int themID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,4 +93,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //Сохраняем установленную тему в переменную
+    @Override
+    public void setTheme(int resId) {
+        super.setTheme(resId);
+        this.themID = resId;
+    }
 }

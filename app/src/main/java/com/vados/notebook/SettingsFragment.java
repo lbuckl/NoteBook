@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 
 import android.preference.Preference;
 import android.preference.PreferenceManager;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.lang.reflect.Method;
 import java.util.Locale;
 
 public class SettingsFragment extends Fragment {
@@ -28,10 +30,11 @@ public class SettingsFragment extends Fragment {
     private Spinner spinner_lang;
     private Spinner spinner_them;
     int lang; // Язык выбираемый селектором
-    String sLang; // Язык получаемый селектором
     String systemLang;
-    Resources.Theme sysTheme; // текущая тема
+    int them; //Тема выбираемая селектором
+    String systemTheme;
     Context context;
+    Resources.Theme theme;
 
 
     String[] langList;
@@ -66,12 +69,21 @@ public class SettingsFragment extends Fragment {
         themeList = view.getResources().getStringArray(R.array.Languiges);
 
         //sysTheme = view.getContext().getTheme(); // получаем текущую тему
+
+        //Инициализируем и записываем язык в Вью
         systemLang = Locale.getDefault().getLanguage(); // получаем текущий язык
-        textView_lang.setText(systemLang);
-        setSpinerLang(systemLang);
-        setLang();
+        setLangInValue(); // пишем значение в соответствующую позцицю
+
+        //Инициализируем и записываем тему в Вью
+        theme = view.getContext().getTheme();
+        textView_them.setText(String.valueOf(MainActivity.themID));
+
+        //textView_them.setText(systemTheme);
+        //view.getContext().setTheme();
+        //context.setTheme("Dark");
 
         lang = 0;
+        them = 0;
     }
 
     @Override
@@ -85,48 +97,59 @@ public class SettingsFragment extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 lang = spinner_lang.getSelectedItemPosition();
                 switch (lang){
-                    case 0:
-                        sLang = langList[0];
+                    case 1:
                         if (!systemLang.equals("en")){
                             setNewLocale("en");
-                            //Locale.setDefault(new Locale("en"));
-                            setLang();
-                            restartActuvuty();
+                            setLangInValue();
+                            restartActivity();
                         }
                         break;
-                    case 1:
-                        sLang = langList[1];
+                    case 2:
                         if (!systemLang.equals("ru")) {
                             setNewLocale("ru");
-                            //Locale.setDefault(new Locale("ru"));
-                            setLang();
-                            restartActuvuty();
+                            setLangInValue();
+                            restartActivity();
                         }
                         break;
+                    default:break;
                 }
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                lang = 0;
-                textView_lang.setText(sLang);
             }
         });
+
+        //Спинер изменения Стиля
+        /*spinner_them.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                them = spinner_them.getSelectedItemPosition();
+                switch (them){
+                    case 0:
+                        sStyle = "Light";
+                        break;
+                    case 1:
+                        sStyle = "Dark";
+                        break;
+                }
+                textView_style.setText(sStyle);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });*/
     }
 
-    //Костыль, который надо будет переделать
-    void setSpinerLang(String lang){
-
-        if (lang.equals("en")) spinner_lang.setSelection(0);
-        else spinner_lang.setSelection(1);
+    // Сетаем текущий язык в текстовое поле
+    void setLangInValue(){
+        systemLang = Locale.getDefault().getLanguage(); // получаем текущий язык
+        textView_lang.setText(systemLang);
     }
 
-    void setLang(){
-        String lang = Locale.getDefault().getLanguage(); // получаем текущий язык
-        textView_lang.setText(lang);
-    }
-
-    void restartActuvuty(){
+    void restartActivity(){
         Intent intent = new Intent();
         intent.setClass(context, context.getClass());
         requireActivity().recreate();
@@ -147,4 +170,17 @@ public class SettingsFragment extends Fragment {
         configuration1.setLocale(locale);
         resources.updateConfiguration(configuration1, resources.getDisplayMetrics());
     }
+
+    //Возвращаем тему
+    private int codeStyleToStyleId(int codeStyle) {
+        switch (codeStyle) {
+            case (0):
+                return R.style.Theme_NoteBook;
+            case (1):
+                return R.style.Theme_Dark;
+            default:
+                return R.style.Theme_Red;
+        }
+    }
+
 }
