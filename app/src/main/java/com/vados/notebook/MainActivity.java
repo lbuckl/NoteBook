@@ -30,14 +30,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Locale locale = new Locale("en");
-        Locale.setDefault(locale);
-        Configuration configuration = new Configuration();
-        configuration.setLocale(locale);
-        Context context = getBaseContext();
-        context.createConfigurationContext(configuration);
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Initialization();

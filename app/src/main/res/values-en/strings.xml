@@ -10,4 +10,6 @@
     <string name="select" translatable="false">Select</string>
     <string name="Lang" translatable="false">Language</string>
     <string name="Them" translatable="false">Theme</string>
+    <string name="Param" translatable="false">Parameter</string>
+    <string name="Value" translatable="false">Value</string>
 </resources>

@@ -10,4 +10,7 @@
     <string name="select" translatable="false">Выбрать</string>
     <string name="Lang" translatable="false">Язык</string>
     <string name="Them" translatable="false">Тема</string>
+    <string name="Param" translatable="false">Параметр</string>
+    <string name="Value" translatable="false">Значение</string>
+
 </resources>

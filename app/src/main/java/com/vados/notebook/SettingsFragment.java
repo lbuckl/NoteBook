@@ -46,12 +46,6 @@ public class SettingsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context = getContext();
-        Locale locale = new Locale("en");
-        Locale.setDefault(locale);
-        Configuration configuration = new Configuration();
-        configuration.setLocale(locale);
-        //Context context = getBaseContext();
-        context.createConfigurationContext(configuration);
     }
 
     @Override
@@ -94,7 +88,8 @@ public class SettingsFragment extends Fragment {
                     case 0:
                         sLang = langList[0];
                         if (!systemLang.equals("en")){
-                            Locale.setDefault(new Locale("en"));
+                            setNewLocale("en");
+                            //Locale.setDefault(new Locale("en"));
                             setLang();
                             restartActuvuty();
                         }
@@ -102,7 +97,8 @@ public class SettingsFragment extends Fragment {
                     case 1:
                         sLang = langList[1];
                         if (!systemLang.equals("ru")) {
-                            Locale.setDefault(new Locale("ru"));
+                            setNewLocale("ru");
+                            //Locale.setDefault(new Locale("ru"));
                             setLang();
                             restartActuvuty();
                         }
@@ -134,5 +130,21 @@ public class SettingsFragment extends Fragment {
         Intent intent = new Intent();
         intent.setClass(context, context.getClass());
         requireActivity().recreate();
+    }
+
+    void setNewLocale(String locVal){
+        Locale locale = new Locale(locVal);
+        Locale.setDefault(locale);
+
+        //Изменяем язык конфигурации джава
+        Configuration configuration = new Configuration();
+        configuration.setLocale(locale);
+        context.createConfigurationContext(configuration);
+
+        //Изменяем язык ресурсов
+        Resources resources = context.getResources();
+        Configuration configuration1 = resources.getConfiguration();
+        configuration1.setLocale(locale);
+        resources.updateConfiguration(configuration1, resources.getDisplayMetrics());
     }
 }
