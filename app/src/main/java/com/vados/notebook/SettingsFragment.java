@@ -25,6 +25,10 @@ import java.lang.reflect.Method;
 import java.util.Locale;
 
 public class SettingsFragment extends Fragment {
+
+    private static final String AppTheme = "APP_THEME";
+    private static final String NameSharedPreference = "LOGIN";
+
     private TextView textView_lang;
     private TextView textView_them;
     private Spinner spinner_lang;
@@ -36,14 +40,12 @@ public class SettingsFragment extends Fragment {
     Context context;
     Resources.Theme theme;
 
-
     String[] langList;
     String[] themeList;
 
     public SettingsFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -76,11 +78,7 @@ public class SettingsFragment extends Fragment {
 
         //Инициализируем и записываем тему в Вью
         theme = view.getContext().getTheme();
-        textView_them.setText(String.valueOf(MainActivity.themID));
-
-        //textView_them.setText(systemTheme);
-        //view.getContext().setTheme();
-        //context.setTheme("Dark");
+        textView_them.setText(String.valueOf(getAppTheme(1)));
 
         lang = 0;
         them = 0;
@@ -171,16 +169,40 @@ public class SettingsFragment extends Fragment {
         resources.updateConfiguration(configuration1, resources.getDisplayMetrics());
     }
 
+    private int getAppTheme(int codeStyle) {
+        return codeStyleToStyleId(getCodeStyle(codeStyle));
+    }
+
     //Возвращаем тему
     private int codeStyleToStyleId(int codeStyle) {
         switch (codeStyle) {
-            case (0):
-                return R.style.Theme_NoteBook;
             case (1):
+                return R.style.Theme_NoteBook;
+            case (2):
                 return R.style.Theme_Dark;
-            default:
+            case (3):
                 return R.style.Theme_Red;
+            default:
+                return R.style.Theme_NoteBook;
         }
+    }
+
+    // Чтение настроек, параметр стиля/темы
+    private int getCodeStyle(int codeStyle){
+        // Работаем через специальный класс сохранения и чтения настроек
+        SharedPreferences sharedPref = context.getSharedPreferences(NameSharedPreference,context.MODE_PRIVATE);
+        //SharedPreferences sharedPref = getSharedPreferences(NameSharedPreference, MODE_PRIVATE);
+        return sharedPref.getInt(AppTheme, codeStyle);
+    }
+
+
+    // Сохранение настроек стиля
+    private void setAppTheme(int codeStyle) {
+        SharedPreferences sharedPref = context.getSharedPreferences(NameSharedPreference,context.MODE_PRIVATE);
+        // Настройки сохраняются посредством специального класса editor.
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt(AppTheme, codeStyle);
+        editor.apply();
     }
 
 }
