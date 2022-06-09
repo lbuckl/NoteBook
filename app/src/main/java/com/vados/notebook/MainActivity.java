@@ -7,12 +7,15 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Toast;
+
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,6 +30,14 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Locale locale = new Locale("en");
+        Locale.setDefault(locale);
+        Configuration configuration = new Configuration();
+        configuration.setLocale(locale);
+        Context context = getBaseContext();
+        context.createConfigurationContext(configuration);
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Initialization();
@@ -87,12 +98,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-    }
-
-    public void restatrActivity(){
-        Intent refresh = getIntent();
-        finish();
-        startActivity(refresh);
     }
 
 }

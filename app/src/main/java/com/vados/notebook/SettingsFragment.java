@@ -1,7 +1,9 @@
 package com.vados.notebook;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
 
@@ -44,6 +46,12 @@ public class SettingsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context = getContext();
+        Locale locale = new Locale("en");
+        Locale.setDefault(locale);
+        Configuration configuration = new Configuration();
+        configuration.setLocale(locale);
+        //Context context = getBaseContext();
+        context.createConfigurationContext(configuration);
     }
 
     @Override
@@ -60,17 +68,14 @@ public class SettingsFragment extends Fragment {
         spinner_lang = view.findViewById(R.id.spinner_lang);
         spinner_them = view.findViewById(R.id.spinner_them);
 
-        //langList = view.getResources().Theme;
-        sysTheme = view.getContext().getTheme(); // получаем текущую тему
-        systemLang = Locale.getDefault().getLanguage(); // получаем текущий язык
-        textView_lang.setText(systemLang);
-
-        //SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
-        //int theme = sp.getInt("THEME", R.style.Theme_NoteBook);
-
-
         langList = view.getResources().getStringArray(R.array.Themes);
         themeList = view.getResources().getStringArray(R.array.Languiges);
+
+        //sysTheme = view.getContext().getTheme(); // получаем текущую тему
+        systemLang = Locale.getDefault().getLanguage(); // получаем текущий язык
+        textView_lang.setText(systemLang);
+        setSpinerLang(systemLang);
+        setLang();
 
         lang = 0;
     }
@@ -88,12 +93,19 @@ public class SettingsFragment extends Fragment {
                 switch (lang){
                     case 0:
                         sLang = langList[0];
-
-                        if (!systemLang.equals("en")) Locale.setDefault(new Locale("en"));
+                        if (!systemLang.equals("en")){
+                            Locale.setDefault(new Locale("en"));
+                            setLang();
+                            restartActuvuty();
+                        }
                         break;
                     case 1:
                         sLang = langList[1];
-                        if (!systemLang.equals("ru")) Locale.setDefault(new Locale("ru"));
+                        if (!systemLang.equals("ru")) {
+                            Locale.setDefault(new Locale("ru"));
+                            setLang();
+                            restartActuvuty();
+                        }
                         break;
                 }
             }
@@ -104,5 +116,23 @@ public class SettingsFragment extends Fragment {
                 textView_lang.setText(sLang);
             }
         });
+    }
+
+    //Костыль, который надо будет переделать
+    void setSpinerLang(String lang){
+
+        if (lang.equals("en")) spinner_lang.setSelection(0);
+        else spinner_lang.setSelection(1);
+    }
+
+    void setLang(){
+        String lang = Locale.getDefault().getLanguage(); // получаем текущий язык
+        textView_lang.setText(lang);
+    }
+
+    void restartActuvuty(){
+        Intent intent = new Intent();
+        intent.setClass(context, context.getClass());
+        requireActivity().recreate();
     }
 }
