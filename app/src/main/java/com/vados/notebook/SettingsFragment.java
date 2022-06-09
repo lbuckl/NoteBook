@@ -1,17 +1,24 @@
 package com.vados.notebook;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.preference.Preference;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import java.util.Locale;
 
 public class SettingsFragment extends Fragment {
     private TextView textView_lang;
@@ -20,8 +27,10 @@ public class SettingsFragment extends Fragment {
     private Spinner spinner_them;
     int lang; // Язык выбираемый селектором
     String sLang; // Язык получаемый селектором
-    int theme; // Тема выбираемая селектором
-    String sTheme; // Язык получаемый селектором
+    String systemLang;
+    Resources.Theme sysTheme; // текущая тема
+    Context context;
+
 
     String[] langList;
     String[] themeList;
@@ -34,7 +43,7 @@ public class SettingsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        context = getContext();
     }
 
     @Override
@@ -52,11 +61,18 @@ public class SettingsFragment extends Fragment {
         spinner_them = view.findViewById(R.id.spinner_them);
 
         //langList = view.getResources().Theme;
+        sysTheme = view.getContext().getTheme(); // получаем текущую тему
+        systemLang = Locale.getDefault().getLanguage(); // получаем текущий язык
+        textView_lang.setText(systemLang);
+
+        //SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        //int theme = sp.getInt("THEME", R.style.Theme_NoteBook);
+
+
         langList = view.getResources().getStringArray(R.array.Themes);
         themeList = view.getResources().getStringArray(R.array.Languiges);
 
         lang = 0;
-        theme = 0;
     }
 
     @Override
@@ -72,9 +88,12 @@ public class SettingsFragment extends Fragment {
                 switch (lang){
                     case 0:
                         sLang = langList[0];
+
+                        if (!systemLang.equals("en")) Locale.setDefault(new Locale("en"));
                         break;
                     case 1:
                         sLang = langList[1];
+                        if (!systemLang.equals("ru")) Locale.setDefault(new Locale("ru"));
                         break;
                 }
             }

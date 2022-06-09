@@ -1,15 +1,13 @@
 <resources>
-    <string name="app_name">Заметки</string>
-    <string name="add">Добавить</string>
-    <string name="settings">Настройки</string>
-    <string name="noteName">Наименование</string>
-    <string name="description">Описание</string>
-    <string name="date">Дата</string>
-    <string name="apply">Применить</string>
-    <string name="delete">Удалить</string>
-    <string name="select">Выбрать</string>
-    <string name="Lang">Язык</string>
-    <string name="Them">Тема</string>
-
-
+    <string name="app_name" translatable="false">Заметки</string>
+    <string name="add" translatable="false">Добавить</string>
+    <string name="settings" translatable="false">Настройки</string>
+    <string name="noteName" translatable="false">Наименование</string>
+    <string name="description" translatable="false">Описание</string>
+    <string name="date" translatable="false">Дата</string>
+    <string name="apply" translatable="false">Применить</string>
+    <string name="delete" translatable="false">Удалить</string>
+    <string name="select" translatable="false">Выбрать</string>
+    <string name="Lang" translatable="false">Язык</string>
+    <string name="Them" translatable="false">Тема</string>
 </resources>
