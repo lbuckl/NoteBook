@@ -100,13 +100,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    //Сохраняем установленную тему в переменную
-    /*@Override
-    public void setTheme(int resId) {
-        super.setTheme(resId);
-        themID = resId;
-    }*/
-
     private int getAppTheme() {
         return codeStyleToStyleId();
     }

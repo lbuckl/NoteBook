@@ -173,7 +173,6 @@ public class SettingsFragment extends Fragment {
         resources.updateConfiguration(configuration1, resources.getDisplayMetrics());
     }
 
-
     // Сохранение настроек стиля
     private void setAppTheme(int codeStyle) {
         MainActivity.sharedPref = context.getSharedPreferences(NameSharedPreference,context.MODE_PRIVATE);
