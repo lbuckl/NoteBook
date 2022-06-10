@@ -19,8 +19,8 @@ import android.widget.Toast;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
-    private static final String AppTheme = "APP_THEME";
-    private static final String NameSharedPreference = "LOGIN";
+    private static  String AppTheme = "APP_THEME";
+    private static  String NameSharedPreference = "LOGIN";
 
     private Button button_add;
     private Button button_settings;
@@ -30,14 +30,13 @@ public class MainActivity extends AppCompatActivity {
     public static EnterNoteFragment enterNoteFragment;
     public static SettingsFragment settingsFragment;
     public static boolean isLandscape;
-    public static int codeStyle;
     public static int themID;
-
+    public static SharedPreferences sharedPref;
+    public static SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(getAppTheme(codeStyle));
-        setTheme(R.style.Theme_Red);
+        setTheme(getAppTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Initialization();
@@ -45,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void Initialization(){
+
         button_add = findViewById(R.id.button_add);
         button_settings = findViewById(R.id.button_settings);
         isLandscape = getResources().getConfiguration().orientation ==
@@ -101,18 +101,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //Сохраняем установленную тему в переменную
-    @Override
+    /*@Override
     public void setTheme(int resId) {
         super.setTheme(resId);
         themID = resId;
-    }
+    }*/
 
-    private int getAppTheme(int codeStyle) {
-        return codeStyleToStyleId(getCodeStyle(codeStyle));
+    private int getAppTheme() {
+        return codeStyleToStyleId();
     }
 
     //Возвращаем тему
-    private int codeStyleToStyleId(int codeStyle) {
+    private int codeStyleToStyleId() {
+        int codeStyle = getCodeStyle();
         switch (codeStyle) {
             case (1):
                 return R.style.Theme_NoteBook;
@@ -126,9 +127,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Чтение настроек, параметр стиля/темы
-    private int getCodeStyle(int codeStyle){
+    private int getCodeStyle(){
+        int codeStyle;
         // Работаем через специальный класс сохранения и чтения настроек
-        SharedPreferences sharedPref = getSharedPreferences(NameSharedPreference,MODE_PRIVATE);
-        return sharedPref.getInt(AppTheme, codeStyle);
+        sharedPref = getSharedPreferences(NameSharedPreference,MODE_PRIVATE);
+        codeStyle = sharedPref.getInt(AppTheme, 2);
+
+        return codeStyle;
     }
 }

@@ -141,7 +141,6 @@ public class SettingsFragment extends Fragment {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
     }
@@ -177,11 +176,11 @@ public class SettingsFragment extends Fragment {
 
     // Сохранение настроек стиля
     private void setAppTheme(int codeStyle) {
-        SharedPreferences sharedPref = context.getSharedPreferences(NameSharedPreference,context.MODE_PRIVATE);
+        MainActivity.sharedPref = context.getSharedPreferences(NameSharedPreference,context.MODE_PRIVATE);
         // Настройки сохраняются посредством специального класса editor.
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putInt(AppTheme, codeStyle);
-        editor.apply();
+        MainActivity.editor = MainActivity.sharedPref.edit();
+        MainActivity.editor.putInt(AppTheme, codeStyle);
+        MainActivity.editor.apply();
     }
 
 }
