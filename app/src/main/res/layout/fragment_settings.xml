@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/white"
+    android:background="?attr/mainbackground"
     android:clickable="true"
     android:focusable="true"
     tools:context=".SettingsFragment" >
@@ -71,8 +71,8 @@
                 android:layout_height="32dp"
                 android:layout_weight="0.5"
                 android:entries="@array/Languiges"
+                android:popupBackground="?attr/mainbackground"
                 tools:ignore="TouchTargetSizeCheck" />
-
         </TableRow>
 
         <TableRow
@@ -101,6 +101,7 @@
                 android:layout_height="32dp"
                 android:layout_weight="0.5"
                 android:entries="@array/Themes"
+                android:popupBackground="?attr/mainbackground"
                 tools:ignore="TouchTargetSizeCheck" />
 
         </TableRow>

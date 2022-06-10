@@ -8,6 +8,7 @@
     android:layout_height="match_parent"
     android:layout_marginLeft="@dimen/margin_high"
     android:layout_marginRight="@dimen/margin_high"
+    android:background="?attr/mainbackground"
     app:layoutManager="LinearLayoutManager"
     tools:context=".ItemFragmentNotes"
     tools:listitem="@layout/fragment_item_notes" />

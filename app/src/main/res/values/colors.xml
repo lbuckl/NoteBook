@@ -10,5 +10,6 @@
     <color name="redPrymary">#EE0083</color>
     <color name="redPrimaryVariant">#EE0030</color>
     <color name="redSecondaryVariant">#BF062C</color>
+    <color name="redBack">#FAB4B4</color>
 
 </resources>
