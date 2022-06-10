@@ -115,11 +115,13 @@ public class EnterNoteFragment extends Fragment {
             if (!isLandscape){
                 fragmentManager.beginTransaction()
                         .replace(R.id.fragment_container,MainActivity.itemFragmentNotes)
+                        .addToBackStack("EnteredNote")
                         .commit();
             }else{
                 fragmentManager.beginTransaction()
                         .replace(R.id.fragment_container_note,new EmptyFragment())
                         .replace(R.id.fragment_container, new ItemFragmentNotes())
+                        .addToBackStack("EnteredNote")
                         .commit();
             }
         });
@@ -130,11 +132,13 @@ public class EnterNoteFragment extends Fragment {
             if (!isLandscape){
                 fragmentManager.beginTransaction()
                         .replace(R.id.fragment_container,MainActivity.itemFragmentNotes)
+                        .addToBackStack("EnteredNote")
                         .commit();
             }else{
                 fragmentManager.beginTransaction()
                         .replace(R.id.fragment_container_note,new EmptyFragment())
                         .replace(R.id.fragment_container, new ItemFragmentNotes())
+                        .addToBackStack("EnteredNote")
                         .commit();
             }
         });

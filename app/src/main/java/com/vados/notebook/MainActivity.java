@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
         button_add.setOnClickListener(v -> {
             //открываем фрагмент с добавлением/изменением заметки
-
+            clearBackStack();
             enterNoteFragment = new EnterNoteFragment(0);
             if (isLandscape) {
                 fragmentManager
@@ -76,24 +76,23 @@ public class MainActivity extends AppCompatActivity {
                         .addToBackStack("EnterFragment")
                         .commit();
             }
-
-
         });
 
         button_settings.setOnClickListener(v -> {
             //открываем фрагмент с настройками
+            clearBackStack();
             settingsFragment = new SettingsFragment();
             if (isLandscape) {
                 fragmentManager
                         .beginTransaction()
                         .replace(R.id.fragment_container_note,settingsFragment)
-                        .addToBackStack("EnterFragment")
+                        .addToBackStack("Settings")
                         .commit();
             }else{
                 fragmentManager
                         .beginTransaction()
                         .replace(R.id.fragment_container,settingsFragment)
-                        .addToBackStack("EnterFragment")
+                        .addToBackStack("Settings")
                         .commit();
             }
         });
@@ -128,5 +127,13 @@ public class MainActivity extends AppCompatActivity {
         codeStyle = sharedPref.getInt(AppTheme, 2);
         themID = codeStyle;
         return codeStyle;
+    }
+
+    private void clearBackStack(){
+        //очищаем бэкстэк
+        if (fragmentManager.getBackStackEntryCount() > 0){
+            FragmentManager.BackStackEntry first = fragmentManager.getBackStackEntryAt(0);
+            fragmentManager.popBackStack(first.getId(),FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        }
     }
 }

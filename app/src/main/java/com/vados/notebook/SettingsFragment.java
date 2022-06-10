@@ -156,11 +156,13 @@ public class SettingsFragment extends Fragment {
                 if (!isLandscape){
                     fragmentManager.beginTransaction()
                             .replace(R.id.fragment_container,MainActivity.itemFragmentNotes)
+                            .addToBackStack("ApplySettings")
                             .commit();
                 }else{
                     fragmentManager.beginTransaction()
                             .replace(R.id.fragment_container_note,new EmptyFragment())
                             .replace(R.id.fragment_container, new ItemFragmentNotes())
+                            .addToBackStack("ApplySettings")
                             .commit();
                 }
             }
@@ -179,7 +181,7 @@ public class SettingsFragment extends Fragment {
         requireActivity().recreate();
     }
 
-    void setNewLocale(String locVal){
+    public void setNewLocale(String locVal){
         Locale locale = new Locale(locVal);
         Locale.setDefault(locale);
 
