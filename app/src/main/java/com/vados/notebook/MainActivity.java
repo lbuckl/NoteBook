@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 
 import android.os.Bundle;
@@ -18,6 +19,8 @@ import android.widget.Toast;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String AppTheme = "APP_THEME";
+    private static final String NameSharedPreference = "LOGIN";
 
     private Button button_add;
     private Button button_settings;
@@ -27,10 +30,14 @@ public class MainActivity extends AppCompatActivity {
     public static EnterNoteFragment enterNoteFragment;
     public static SettingsFragment settingsFragment;
     public static boolean isLandscape;
+    public static int codeStyle;
     public static int themID;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(getAppTheme(codeStyle));
+        setTheme(R.style.Theme_Red);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Initialization();
@@ -97,6 +104,31 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void setTheme(int resId) {
         super.setTheme(resId);
-        this.themID = resId;
+        themID = resId;
+    }
+
+    private int getAppTheme(int codeStyle) {
+        return codeStyleToStyleId(getCodeStyle(codeStyle));
+    }
+
+    //Возвращаем тему
+    private int codeStyleToStyleId(int codeStyle) {
+        switch (codeStyle) {
+            case (1):
+                return R.style.Theme_NoteBook;
+            case (2):
+                return R.style.Theme_Dark;
+            case (3):
+                return R.style.Theme_Red;
+            default:
+                return R.style.Theme_NoteBook;
+        }
+    }
+
+    // Чтение настроек, параметр стиля/темы
+    private int getCodeStyle(int codeStyle){
+        // Работаем через специальный класс сохранения и чтения настроек
+        SharedPreferences sharedPref = getSharedPreferences(NameSharedPreference,MODE_PRIVATE);
+        return sharedPref.getInt(AppTheme, codeStyle);
     }
 }

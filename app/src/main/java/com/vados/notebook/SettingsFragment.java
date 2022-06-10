@@ -25,7 +25,6 @@ import java.lang.reflect.Method;
 import java.util.Locale;
 
 public class SettingsFragment extends Fragment {
-
     private static final String AppTheme = "APP_THEME";
     private static final String NameSharedPreference = "LOGIN";
 
@@ -78,7 +77,7 @@ public class SettingsFragment extends Fragment {
 
         //Инициализируем и записываем тему в Вью
         theme = view.getContext().getTheme();
-        textView_them.setText(String.valueOf(getAppTheme(1)));
+        //textView_them.setText();
 
         lang = 0;
         them = 0;
@@ -125,16 +124,16 @@ public class SettingsFragment extends Fragment {
                 int themID = spinner_them.getSelectedItemPosition();
                 switch (themID){
                     case 1:
-                        context.setTheme(getAppTheme(1));
-                        //restartActivity();
+                        setAppTheme(1);
+                        restartActivity();
                         break;
                     case 2:
-                        context.setTheme(getAppTheme(2));
-                        //restartActivity();
+                        setAppTheme(2);
+                        restartActivity();
                         break;
                     case 3:
-                        context.setTheme(getAppTheme(3));
-                        //restartActivity();
+                        setAppTheme(3);
+                        restartActivity();
                         break;
                 }
 
@@ -173,32 +172,6 @@ public class SettingsFragment extends Fragment {
         Configuration configuration1 = resources.getConfiguration();
         configuration1.setLocale(locale);
         resources.updateConfiguration(configuration1, resources.getDisplayMetrics());
-    }
-
-    private int getAppTheme(int codeStyle) {
-        return codeStyleToStyleId(getCodeStyle(codeStyle));
-    }
-
-    //Возвращаем тему
-    private int codeStyleToStyleId(int codeStyle) {
-        switch (codeStyle) {
-            case (1):
-                return R.style.Theme_NoteBook;
-            case (2):
-                return R.style.Theme_Dark;
-            case (3):
-                return R.style.Theme_Red;
-            default:
-                return R.style.Theme_NoteBook;
-        }
-    }
-
-    // Чтение настроек, параметр стиля/темы
-    private int getCodeStyle(int codeStyle){
-        // Работаем через специальный класс сохранения и чтения настроек
-        SharedPreferences sharedPref = context.getSharedPreferences(NameSharedPreference,context.MODE_PRIVATE);
-        //SharedPreferences sharedPref = getSharedPreferences(NameSharedPreference, MODE_PRIVATE);
-        return sharedPref.getInt(AppTheme, codeStyle);
     }
 
 
