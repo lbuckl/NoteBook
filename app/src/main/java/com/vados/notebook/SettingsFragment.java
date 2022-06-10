@@ -72,14 +72,16 @@ public class SettingsFragment extends Fragment {
         spinner_them = view.findViewById(R.id.spinner_them);
         button_apply = view.findViewById(R.id.button_applySettings);
 
-        langList = view.getResources().getStringArray(R.array.Themes);
-        themeList = view.getResources().getStringArray(R.array.Languiges);
+        langList = view.getResources().getStringArray(R.array.Languiges);
+        themeList = view.getResources().getStringArray(R.array.Themes);
 
         //Инициализируем и записываем язык в Вью
         systemLang = Locale.getDefault().getLanguage(); // получаем текущий язык
         setLangInValue(); // пишем значение в соответствующую позцицю
 
         //Инициализируем и записываем тему в Вью
+        setThemeInValue(MainActivity.themID);
+
         isLandscape = getResources().getConfiguration().orientation ==
                 Configuration.ORIENTATION_LANDSCAPE;
         lang = 0;
@@ -91,7 +93,6 @@ public class SettingsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
-
         //Спинер изменения языка
         spinner_lang.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -107,7 +108,6 @@ public class SettingsFragment extends Fragment {
                     default:break;
                 }
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
@@ -171,8 +171,15 @@ public class SettingsFragment extends Fragment {
 
     // Сетаем текущий язык в текстовое поле
     void setLangInValue(){
+        int val = 0;
         systemLang = Locale.getDefault().getLanguage(); // получаем текущий язык
-        textView_lang.setText(systemLang);
+        if (systemLang.equals("en")) val = 1;
+        if (systemLang.equals("ru")) val = 2;
+        textView_lang.setText(langList[val]);
+    }
+
+    void setThemeInValue(int themeID){
+        textView_them.setText(themeList[themeID]);
     }
 
     void restartActivity(){
