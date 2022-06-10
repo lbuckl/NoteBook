@@ -119,13 +119,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
     // Чтение настроек, параметр стиля/темы
     private int getCodeStyle(){
         int codeStyle;
         // Работаем через специальный класс сохранения и чтения настроек
         sharedPref = getSharedPreferences(NameSharedPreference,MODE_PRIVATE);
         codeStyle = sharedPref.getInt(AppTheme, 2);
-
+        themID = codeStyle;
         return codeStyle;
     }
 }

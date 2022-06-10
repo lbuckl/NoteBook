@@ -10,6 +10,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.preference.Preference;
 import android.preference.PreferenceManager;
@@ -18,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -32,12 +34,15 @@ public class SettingsFragment extends Fragment {
     private TextView textView_them;
     private Spinner spinner_lang;
     private Spinner spinner_them;
+    private Button button_apply;
     int lang; // Язык выбираемый селектором
     String systemLang;
+    String chooseLang;
     int them; //Тема выбираемая селектором
     String systemTheme;
     Context context;
     Resources.Theme theme;
+    private boolean isLandscape;
 
     String[] langList;
     String[] themeList;
@@ -62,51 +67,42 @@ public class SettingsFragment extends Fragment {
 
     private void initialization(View view){
         textView_lang = view.findViewById(R.id.textView_langVal);
-        textView_them = view.findViewById(R.id.textView_themVal);;
+        textView_them = view.findViewById(R.id.textView_themVal);
         spinner_lang = view.findViewById(R.id.spinner_lang);
         spinner_them = view.findViewById(R.id.spinner_them);
+        button_apply = view.findViewById(R.id.button_applySettings);
 
         langList = view.getResources().getStringArray(R.array.Themes);
         themeList = view.getResources().getStringArray(R.array.Languiges);
-
-        //sysTheme = view.getContext().getTheme(); // получаем текущую тему
 
         //Инициализируем и записываем язык в Вью
         systemLang = Locale.getDefault().getLanguage(); // получаем текущий язык
         setLangInValue(); // пишем значение в соответствующую позцицю
 
         //Инициализируем и записываем тему в Вью
-        theme = view.getContext().getTheme();
-        //textView_them.setText();
-
+        isLandscape = getResources().getConfiguration().orientation ==
+                Configuration.ORIENTATION_LANDSCAPE;
         lang = 0;
-        them = 0;
+        them = MainActivity.themID;
+        chooseLang = systemLang;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
 
         //Спинер изменения языка
         spinner_lang.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 lang = spinner_lang.getSelectedItemPosition();
                 switch (lang){
                     case 1:
-                        if (!systemLang.equals("en")){
-                            setNewLocale("en");
-                            setLangInValue();
-                            restartActivity();
-                        }
+                        chooseLang = "en";
                         break;
                     case 2:
-                        if (!systemLang.equals("ru")) {
-                            setNewLocale("ru");
-                            setLangInValue();
-                            restartActivity();
-                        }
+                        chooseLang = "ru";
                         break;
                     default:break;
                 }
@@ -117,6 +113,7 @@ public class SettingsFragment extends Fragment {
             }
         });
 
+
         //Спинер изменения Стиля
         spinner_them.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -124,16 +121,13 @@ public class SettingsFragment extends Fragment {
                 int themID = spinner_them.getSelectedItemPosition();
                 switch (themID){
                     case 1:
-                        setAppTheme(1);
-                        restartActivity();
+                        them = 1;
                         break;
                     case 2:
-                        setAppTheme(2);
-                        restartActivity();
+                        them = 2;
                         break;
                     case 3:
-                        setAppTheme(3);
-                        restartActivity();
+                        them = 3;
                         break;
                 }
 
@@ -141,6 +135,34 @@ public class SettingsFragment extends Fragment {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+        button_apply.setOnClickListener(v -> {
+            boolean isChose = false;
+            if (them != MainActivity.themID){
+                setAppTheme(them);
+                isChose = true;
+            }
+
+            if (!chooseLang.equals(systemLang)){
+                setNewLocale(chooseLang);
+                setLangInValue();
+                isChose = true;
+            }
+
+            if (isChose) restartActivity();
+            else {
+                if (!isLandscape){
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.fragment_container,MainActivity.itemFragmentNotes)
+                            .commit();
+                }else{
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.fragment_container_note,new EmptyFragment())
+                            .replace(R.id.fragment_container, new ItemFragmentNotes())
+                            .commit();
+                }
             }
         });
     }
