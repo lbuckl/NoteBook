@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.NoteBook" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.NoteBook" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -16,9 +16,11 @@
         <item name="mainbackground">@color/white</item>
         <item name="android:textColor">@color/black</item>
         <item name="add_button_icon">@drawable/ic_button_add_blue</item>
+        <!-- menu. -->
+        <item name="popupMenuBackground">@color/cardview_light_background</item>
     </style>
 
-    <style name="Theme.Dark" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.Dark" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_200</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -33,10 +35,12 @@
         <!-- Customize your theme here. -->
         <item name="mainbackground">@color/black</item>
         <item name="android:textColor">@color/white</item>
-        <item name="add_button_icon">@drawable/ic_button_add_blue</item>
+        <item name="add_button_icon">@drawable/ic_button_add_pur</item>
+        <!-- menu. -->
+        <item name="popupMenuBackground">@color/cardview_dark_background</item>
     </style>
 
-    <style name="Theme.Red" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.Red" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/redPrymary</item>
         <item name="colorPrimaryVariant">@color/redPrimaryVariant</item>
@@ -52,6 +56,10 @@
         <!-- Customize your theme here. -->
         <item name="background">@color/redBack</item>
         <item name="add_button_icon">@drawable/ic_button_add_red</item>
+        <!-- menu. -->
+        <item name="popupMenuBackground">@color/redBack</item>
     </style>
+
+
 
 </resources>

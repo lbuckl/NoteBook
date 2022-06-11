@@ -9,4 +9,9 @@
     <style name="RowStyle">
         <item name="android:textSize">18dp</item>
     </style>
+
+    <style name="actionOverflowButtonStyle"
+        parent="@style/Widget.AppCompat.ActionButton.Overflow">
+        <item name="android:tint">@color/white</item>
+    </style>
 </resources>
