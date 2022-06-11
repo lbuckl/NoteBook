@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/app_bar_search"
+        android:icon="@drawable/ic_search_black_24dp"
+        android:title="@string/Search"
+        app:actionViewClass="android.widget.SearchView">
+
+    </item>
+
+    <item android:id="@+id/aboutApp"
+          android:title="@string/AboutApp" />
+
+    <group >
+        <item
+            android:id="@+id/app_bar_sort"
+            android:title="Сортировка"
+            app:actionLayout="@layout/switch_item"
+            app:showAsAction="always" />
+    </group>
+</menu>

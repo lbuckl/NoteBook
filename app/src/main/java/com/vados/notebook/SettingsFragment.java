@@ -2,7 +2,6 @@ package com.vados.notebook;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -12,10 +11,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import android.preference.Preference;
-import android.preference.PreferenceManager;
-import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -23,7 +22,8 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import java.lang.reflect.Method;
+import com.vados.notebook.main.MainFragment;
+
 import java.util.Locale;
 
 public class SettingsFragment extends Fragment {
@@ -61,6 +61,10 @@ public class SettingsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
+
+        //Скрываем иконки меню
+        setHasOptionsMenu(true);
+
         initialization(view);
         return view;
     }
@@ -211,6 +215,16 @@ public class SettingsFragment extends Fragment {
         MainActivity.editor = MainActivity.sharedPref.edit();
         MainActivity.editor.putInt(AppTheme, codeStyle);
         MainActivity.editor.apply();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        MenuItem item_sort = menu.findItem(R.id.app_bar_sort);
+        if (item_sort != null) item_sort.setVisible(false);
+        MenuItem item_search = menu.findItem(R.id.app_bar_search);
+        if (item_search != null) item_search.setVisible(false);
+
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
 }

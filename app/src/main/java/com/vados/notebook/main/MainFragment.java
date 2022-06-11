@@ -1,4 +1,4 @@
-package com.vados.notebook;
+package com.vados.notebook.main;
 
 import android.os.Bundle;
 
@@ -10,6 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+
+import com.vados.notebook.EnterNoteFragment;
+import com.vados.notebook.MainActivity;
+import com.vados.notebook.R;
 
 public class MainFragment extends Fragment {
 

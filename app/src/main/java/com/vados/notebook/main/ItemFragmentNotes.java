@@ -1,4 +1,4 @@
-package com.vados.notebook;
+package com.vados.notebook.main;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -16,6 +16,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import com.vados.notebook.MainActivity;
+import com.vados.notebook.MyItemRecyclerViewAdapter;
+import com.vados.notebook.R;
 import com.vados.notebook.placeholder.PlaceholderContent;
 
 public class ItemFragmentNotes extends Fragment {

@@ -12,7 +12,6 @@
     <string name="Them" translatable="false">Тема</string>
     <string name="Param" translatable="false">Параметр</string>
     <string name="Value" translatable="false">Значение</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
+    <string name="Search" translatable="false">Поиск</string>
+    <string name="AboutApp" translatable="false">О приложении</string>
 </resources>

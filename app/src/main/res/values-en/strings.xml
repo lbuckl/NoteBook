@@ -12,4 +12,6 @@
     <string name="Them" translatable="false">Theme</string>
     <string name="Param" translatable="false">Parameter</string>
     <string name="Value" translatable="false">Value</string>
+    <string name="Search" translatable="false">Search</string>
+    <string name="AboutApp" translatable="false">AboutApp</string>
 </resources>

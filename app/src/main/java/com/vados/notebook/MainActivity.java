@@ -1,23 +1,22 @@
 package com.vados.notebook;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Button;
-import android.widget.ImageButton;
+import android.widget.Switch;
 import android.widget.Toast;
 
-import java.util.Locale;
+import com.google.android.material.appbar.AppBarLayout;
+import com.vados.notebook.main.ItemFragmentNotes;
+import com.vados.notebook.main.MainFragment;
 
 public class MainActivity extends AppCompatActivity {
     private static  String AppTheme = "APP_THEME";
@@ -58,6 +57,33 @@ public class MainActivity extends AppCompatActivity {
                 .beginTransaction()
                 .replace(R.id.fragment_container,mainFragment)
                 .commit();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        Switch aSwitch = findViewById(R.id.app_bar_sort);
+        int id = item.getItemId();
+
+        switch (id){
+            case R.id.aboutApp:
+                    Toast toast = Toast.makeText(this, "О приложении", Toast.LENGTH_LONG);
+                    toast.show();
+                    return true;
+            case R.id.app_bar_search:
+                    Toast toast1 = Toast.makeText(this, "Найти", Toast.LENGTH_LONG);
+                    toast1.show();
+                    return true;
+            case R.id.app_bar_sort:
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     public void ClickListener(){

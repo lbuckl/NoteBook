@@ -11,11 +11,15 @@ import androidx.fragment.app.FragmentManager;
 import android.content.res.Configuration;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
+
+import com.vados.notebook.main.MainFragment;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -71,7 +75,10 @@ public class EnterNoteFragment extends Fragment {
         //Проверяем на поворот экрана в горизонталь. true - значи повёрнут
         isLandscape = getResources().getConfiguration().orientation ==
                 Configuration.ORIENTATION_LANDSCAPE;
-        //gcalendar.add(Calendar.HOUR,5);
+
+        //скрываем меню
+        setHasOptionsMenu(true);
+
         return view;
     }
 
@@ -158,5 +165,15 @@ public class EnterNoteFragment extends Fragment {
                     },YEAR,MONTH,DAY);
             datePickerDialog.show();
         });
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        MenuItem item_sort = menu.findItem(R.id.app_bar_sort);
+        if (item_sort != null) item_sort.setVisible(false);
+        MenuItem item_search = menu.findItem(R.id.app_bar_search);
+        if (item_search != null) item_search.setVisible(false);
+
+        super.onCreateOptionsMenu(menu, inflater);
     }
 }
