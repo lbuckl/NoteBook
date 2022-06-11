@@ -11,14 +11,10 @@
 
     </item>
 
-    <item android:id="@+id/aboutApp"
-          android:title="@string/AboutApp" />
+    <item android:id="@+id/settings"
+        android:title="@string/settings" />
 
-    <group >
-        <item
-            android:id="@+id/app_bar_sort"
-            android:title="Сортировка"
-            app:actionLayout="@layout/switch_item"
-            app:showAsAction="always" />
-    </group>
+    <item
+        android:id="@+id/aboutApp"
+        android:title="@string/AboutApp" />
 </menu>

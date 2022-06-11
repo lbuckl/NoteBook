@@ -19,8 +19,8 @@ import com.vados.notebook.main.ItemFragmentNotes;
 import com.vados.notebook.main.MainFragment;
 
 public class MainActivity extends AppCompatActivity {
-    private static  String AppTheme = "APP_THEME";
-    private static  String NameSharedPreference = "LOGIN";
+    private static String AppTheme = "APP_THEME";
+    private static String NameSharedPreference = "LOGIN";
 
     private Button button_add;
     private Button button_settings;
@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     public static MainFragment mainFragment = new MainFragment();
     public static EnterNoteFragment enterNoteFragment;
     public static SettingsFragment settingsFragment;
+    public static AboutAppFragment aboutAppFragment;
     public static boolean isLandscape;
     public static int themID;
     public static SharedPreferences sharedPref;
@@ -67,19 +68,45 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        Switch aSwitch = findViewById(R.id.app_bar_sort);
         int id = item.getItemId();
 
         switch (id){
             case R.id.aboutApp:
-                    Toast toast = Toast.makeText(this, "О приложении", Toast.LENGTH_LONG);
-                    toast.show();
+                aboutAppFragment = new AboutAppFragment();
+                if (isLandscape) {
+                    fragmentManager
+                            .beginTransaction()
+                            .replace(R.id.fragment_container_note,aboutAppFragment)
+                            .addToBackStack("Settings")
+                            .commit();
+                }else{
+                    fragmentManager
+                            .beginTransaction()
+                            .replace(R.id.fragment_container,aboutAppFragment)
+                            .addToBackStack("Settings")
+                            .commit();
+                }
                     return true;
             case R.id.app_bar_search:
                     Toast toast1 = Toast.makeText(this, "Найти", Toast.LENGTH_LONG);
                     toast1.show();
                     return true;
-            case R.id.app_bar_sort:
+
+            case R.id.settings:
+                settingsFragment = new SettingsFragment();
+                if (isLandscape) {
+                    fragmentManager
+                            .beginTransaction()
+                            .replace(R.id.fragment_container_note,settingsFragment)
+                            .addToBackStack("Settings")
+                            .commit();
+                }else{
+                    fragmentManager
+                            .beginTransaction()
+                            .replace(R.id.fragment_container,settingsFragment)
+                            .addToBackStack("Settings")
+                            .commit();
+                }
                 return true;
         }
 
@@ -87,45 +114,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void ClickListener(){
-
-        button_add.setOnClickListener(v -> {
-            //открываем фрагмент с добавлением/изменением заметки
-            clearBackStack();
-            enterNoteFragment = new EnterNoteFragment(0);
-            if (isLandscape) {
-                fragmentManager
-                        .beginTransaction()
-                        .replace(R.id.fragment_container_note,enterNoteFragment)
-                        .addToBackStack("EnterFragment")
-                        .commit();
-            }else{
-                fragmentManager
-                        .beginTransaction()
-                        .replace(R.id.fragment_container,enterNoteFragment)
-                        .addToBackStack("EnterFragment")
-                        .commit();
-            }
-        });
-
-
-        button_settings.setOnClickListener(v -> {
-            //открываем фрагмент с настройками
-            clearBackStack();
-            settingsFragment = new SettingsFragment();
-            if (isLandscape) {
-                fragmentManager
-                        .beginTransaction()
-                        .replace(R.id.fragment_container_note,settingsFragment)
-                        .addToBackStack("Settings")
-                        .commit();
-            }else{
-                fragmentManager
-                        .beginTransaction()
-                        .replace(R.id.fragment_container,settingsFragment)
-                        .addToBackStack("Settings")
-                        .commit();
-            }
-        });
 
     }
 

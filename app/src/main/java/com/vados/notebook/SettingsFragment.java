@@ -70,7 +70,7 @@ public class SettingsFragment extends Fragment {
     }
 
     private void initialization(View view){
-        textView_lang = view.findViewById(R.id.textView_langVal);
+        textView_lang = view.findViewById(R.id.textView_appVal);
         textView_them = view.findViewById(R.id.textView_themVal);
         spinner_lang = view.findViewById(R.id.spinner_lang);
         spinner_them = view.findViewById(R.id.spinner_them);
@@ -219,8 +219,6 @@ public class SettingsFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        MenuItem item_sort = menu.findItem(R.id.app_bar_sort);
-        if (item_sort != null) item_sort.setVisible(false);
         MenuItem item_search = menu.findItem(R.id.app_bar_search);
         if (item_search != null) item_search.setVisible(false);
 

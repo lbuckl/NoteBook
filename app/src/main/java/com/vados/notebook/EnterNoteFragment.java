@@ -169,8 +169,6 @@ public class EnterNoteFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        MenuItem item_sort = menu.findItem(R.id.app_bar_sort);
-        if (item_sort != null) item_sort.setVisible(false);
         MenuItem item_search = menu.findItem(R.id.app_bar_search);
         if (item_search != null) item_search.setVisible(false);
 
