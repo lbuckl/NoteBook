@@ -2,14 +2,18 @@ package com.vados.notebook;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentContainerView;
 import androidx.fragment.app.FragmentManager;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Switch;
 import android.widget.Toast;
@@ -60,12 +64,14 @@ public class MainActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
         switch (id){
             case R.id.aboutApp:
+                clearBackStack();
                 aboutAppFragment = new AboutAppFragment();
                 if (isLandscape) {
                     fragmentManager
@@ -87,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
                     return true;
 
             case R.id.settings:
+                clearBackStack();
                 settingsFragment = new SettingsFragment();
                 if (isLandscape) {
                     fragmentManager
