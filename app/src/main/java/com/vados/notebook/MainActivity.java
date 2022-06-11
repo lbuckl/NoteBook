@@ -14,6 +14,7 @@ import android.content.res.Configuration;
 
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import java.util.Locale;
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     public static Notes notes = new Notes();
     public static FragmentManager fragmentManager;
     public static ItemFragmentNotes itemFragmentNotes = new ItemFragmentNotes();
+    public static MainFragment mainFragment = new MainFragment();
     public static EnterNoteFragment enterNoteFragment;
     public static SettingsFragment settingsFragment;
     public static boolean isLandscape;
@@ -47,13 +49,14 @@ public class MainActivity extends AppCompatActivity {
 
         button_add = findViewById(R.id.button_add);
         button_settings = findViewById(R.id.button_settings);
+
         isLandscape = getResources().getConfiguration().orientation ==
                 Configuration.ORIENTATION_LANDSCAPE;
 
         fragmentManager =  getSupportFragmentManager();
         fragmentManager
                 .beginTransaction()
-                .replace(R.id.fragment_container,itemFragmentNotes)
+                .replace(R.id.fragment_container,mainFragment)
                 .commit();
     }
 
@@ -77,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
                         .commit();
             }
         });
+
 
         button_settings.setOnClickListener(v -> {
             //открываем фрагмент с настройками
@@ -129,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
         return codeStyle;
     }
 
-    private void clearBackStack(){
+    private static void clearBackStack(){
         //очищаем бэкстэк
         if (fragmentManager.getBackStackEntryCount() > 0){
             FragmentManager.BackStackEntry first = fragmentManager.getBackStackEntryAt(0);
