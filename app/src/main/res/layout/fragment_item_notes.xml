@@ -24,10 +24,9 @@
 
     <TextView
         android:id="@+id/date"
-        android:layout_width="0dp"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/text_margin"
-        android:layout_weight="1.2"
         android:gravity="end"
         android:textAppearance="?attr/textAppearanceListItem"
         android:textSize="12sp" />

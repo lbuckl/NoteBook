@@ -5,7 +5,7 @@
     android:id="@+id/list"
     android:name="com.vados.notebook.ItemFragmentNotes"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_marginLeft="@dimen/margin_high"
     android:layout_marginRight="@dimen/margin_high"
     android:background="?attr/mainbackground"
