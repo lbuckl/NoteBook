@@ -21,9 +21,6 @@ import com.vados.notebook.main.MainFragment;
 public class MainActivity extends AppCompatActivity {
     private static String AppTheme = "APP_THEME";
     private static String NameSharedPreference = "LOGIN";
-
-    private Button button_add;
-    private Button button_settings;
     public static Notes notes = new Notes();
     public static FragmentManager fragmentManager;
     public static ItemFragmentNotes itemFragmentNotes = new ItemFragmentNotes();
@@ -46,9 +43,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void Initialization(){
-
-        button_add = findViewById(R.id.button_add);
-        button_settings = findViewById(R.id.button_settings);
 
         isLandscape = getResources().getConfiguration().orientation ==
                 Configuration.ORIENTATION_LANDSCAPE;
