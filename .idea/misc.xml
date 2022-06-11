@@ -4,12 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/79174/AndroidStudioProjects/NoteBook/app/src/main/res/drawable/ic_launcher_background.xml" value="0.26614583333333336" />
-        <entry key="..\:/Users/79174/AndroidStudioProjects/NoteBook/app/src/main/res/layout-land/activity_main.xml" value="0.2" />
+        <entry key="..\:/Users/79174/AndroidStudioProjects/NoteBook/app/src/main/res/layout-land/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/79174/AndroidStudioProjects/NoteBook/app/src/main/res/layout-sw600dp/activity_main.xml" value="0.18532818532818532" />
         <entry key="..\:/Users/79174/AndroidStudioProjects/NoteBook/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/79174/AndroidStudioProjects/NoteBook/app/src/main/res/layout/fragment_about_app.xml" value="0.4" />
         <entry key="..\:/Users/79174/AndroidStudioProjects/NoteBook/app/src/main/res/layout/fragment_empty.xml" value="0.24615384615384617" />
-        <entry key="..\:/Users/79174/AndroidStudioProjects/NoteBook/app/src/main/res/layout/fragment_enter_note.xml" value="0.264" />
+        <entry key="..\:/Users/79174/AndroidStudioProjects/NoteBook/app/src/main/res/layout/fragment_enter_note.xml" value="0.4" />
         <entry key="..\:/Users/79174/AndroidStudioProjects/NoteBook/app/src/main/res/layout/fragment_item_notes.xml" value="0.4" />
         <entry key="..\:/Users/79174/AndroidStudioProjects/NoteBook/app/src/main/res/layout/fragment_item_notes_list.xml" value="0.24615384615384617" />
         <entry key="..\:/Users/79174/AndroidStudioProjects/NoteBook/app/src/main/res/layout/fragment_main.xml" value="0.264" />
