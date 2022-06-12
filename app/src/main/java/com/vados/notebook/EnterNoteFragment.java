@@ -97,7 +97,7 @@ public class EnterNoteFragment extends Fragment {
         if (replaseID > 0){
             textInput_NoteName.setText(MainActivity.notes.getNameForId(replaseID-1));
             textInput_Note.setText(MainActivity.notes.getNoteForId(replaseID-1));
-            textView_Date.setText(formatDate.getCustomStringDate(MainActivity.notes.getDateForId(replaseID-1)));
+            textView_Date.setText(MainActivity.notes.getDateForId(replaseID-1));
             button_delete.setVisibility(View.VISIBLE);
             button_delete.setClickable(true);
         }
@@ -114,7 +114,8 @@ public class EnterNoteFragment extends Fragment {
                 if (selectDate != null) MainActivity.notes.setNote(replaseID,nName,nValue,selectDate);
                 else MainActivity.notes.setNote(replaseID,nName,nValue);
             }else{
-                MainActivity.notes.addNewNote(nName, nValue);
+                if (selectDate != null) MainActivity.notes.addNewNote(nName,nValue,selectDate);
+                else MainActivity.notes.addNewNote(nName,nValue);
             }
 
             selectDate = null;

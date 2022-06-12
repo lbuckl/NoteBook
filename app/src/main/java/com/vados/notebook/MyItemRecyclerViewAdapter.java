@@ -45,7 +45,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
         holder.mItem = mValues.get(position);
         holder.mIdView.setText(mValues.get(position).id);
         holder.mContentView.setText(mValues.get(position).content);
-        holder.mDateView.setText(formatDate.getCustomStringDate(mValues.get(position).noteDate));
+        holder.mDateView.setText(mValues.get(position).noteDate);
         fragmentManager = MainActivity.fragmentManager;
 
         holder.itemView.setOnClickListener(v -> {
