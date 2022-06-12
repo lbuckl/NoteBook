@@ -166,6 +166,24 @@ public class MainActivity extends AppCompatActivity {
                                     .commit();
                         }
                         return true;
+                    case R.id.drawer_settings:
+                        drawer.close();
+                        clearBackStack();
+                        settingsFragment = new SettingsFragment();
+                        if (isLandscape) {
+                            fragmentManager
+                                    .beginTransaction()
+                                    .replace(R.id.fragment_container_note,settingsFragment)
+                                    .addToBackStack("Settings")
+                                    .commit();
+                        }else{
+                            fragmentManager
+                                    .beginTransaction()
+                                    .replace(R.id.fragment_container,settingsFragment)
+                                    .addToBackStack("Settings")
+                                    .commit();
+                        }
+                        return true;
                     case R.id.drawer_exit:
                         finish();
                 }

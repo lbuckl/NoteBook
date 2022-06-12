@@ -16,7 +16,7 @@
         android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="340dp"
+            android:layout_width="@dimen/land_fragment_width"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
