@@ -17,4 +17,5 @@
     <string name="App" translatable="false">Приложение</string>
     <string name="VersionApp" translatable="false">Версия</string>
     <string name="Author" translatable="false">Автор</string>
+    <string name="Exit" translatable="false">Выход</string>
 </resources>
