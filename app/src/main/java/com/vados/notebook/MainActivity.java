@@ -1,8 +1,10 @@
 package com.vados.notebook;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentContainerView;
 import androidx.fragment.app.FragmentManager;
 
@@ -20,6 +22,7 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.navigation.NavigationView;
 import com.vados.notebook.main.ItemFragmentNotes;
 import com.vados.notebook.main.MainFragment;
 
@@ -37,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
     public static int themID;
     public static SharedPreferences sharedPref;
     public static SharedPreferences.Editor editor;
+    Toolbar toolbar;
+    DrawerLayout drawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +53,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void Initialization(){
+        //верхнее меню
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        //боковое меню
+        initToolbar();
+        runToolbar();
 
         isLandscape = getResources().getConfiguration().orientation ==
                 Configuration.ORIENTATION_LANDSCAPE;
@@ -115,6 +124,54 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void initToolbar(){
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        //Находим Drawer_layout
+        drawer = findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toogle = new ActionBarDrawerToggle(
+                this,drawer,toolbar,
+                R.string.apply,
+                R.string.delete);
+        drawer.addDrawerListener(toogle);
+        toogle.syncState();
+    }
+
+    private void runToolbar(){
+        NavigationView navigationView = findViewById(R.id.navigation_view);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+                switch (id){
+                    case R.id.drawer_about:
+                        drawer.close();
+                        clearBackStack();
+                        aboutAppFragment = new AboutAppFragment();
+                        if (isLandscape) {
+                            fragmentManager
+                                    .beginTransaction()
+                                    .add(R.id.fragment_container_note,aboutAppFragment)
+                                    .addToBackStack("Settings")
+                                    .commit();
+                        }else{
+                            drawer.close();
+                            clearBackStack();
+                            fragmentManager
+                                    .beginTransaction()
+                                    .add(R.id.fragment_container,aboutAppFragment)
+                                    .addToBackStack("Settings")
+                                    .commit();
+                        }
+                        return true;
+                    case R.id.drawer_exit:
+                        finish();
+                }
+                return false;
+            }
+        });
     }
 
     public void ClickListener(){

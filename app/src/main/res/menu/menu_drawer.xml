@@ -3,8 +3,10 @@
 
     <item
         android:id="@+id/drawer_about"
+        android:icon="@android:drawable/ic_menu_preferences"
         android:title="@string/AboutApp" />
     <item
         android:id="@+id/drawer_exit"
+        android:icon="@android:drawable/ic_menu_compass"
         android:title="@string/Exit"/>
 </menu>
