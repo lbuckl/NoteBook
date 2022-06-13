@@ -10,11 +10,10 @@ import java.util.GregorianCalendar;
 
 public class Notes {
     private ArrayList<String> noteNames = new ArrayList<>();
-    private ArrayList<String> createDate = new ArrayList<>();
     private ArrayList<String> notes = new ArrayList<>();
+    private ArrayList<Date> createDate = new ArrayList<>();
 
     Calendar gcalendar = new GregorianCalendar();
-    FormatDate formatDate = new FormatDate();
 
     protected Notes() {
 
@@ -24,14 +23,14 @@ public class Notes {
     public void addNewNote(String name, String note){
         this.noteNames.add(name);
         this.notes.add(note);
-        this.createDate.add(formatDate.getCustomStringDate(gcalendar.getTime()));
+        this.createDate.add(gcalendar.getTime());
     }
 
     //Создать запись по имени, значению и времени
     public void addNewNote(String name, String note, Date date){
         this.noteNames.add(name);
         this.notes.add(note);
-        this.createDate.add(formatDate.getCustomStringDate(date));
+        this.createDate.add(date);
     }
 
     public void deleteNoteForId(int id){
@@ -52,7 +51,8 @@ public class Notes {
 
     //получить Дату и время по id
     public String getDateForId(int id){
-        return createDate.get(id);
+        FormatDate formatDate = new FormatDate(); // находится именно тут, чтобы менялся язык вывода
+        return formatDate.getCustomStringDate(createDate.get(id));
     }
 
     //получить Значение по id
@@ -75,7 +75,7 @@ public class Notes {
         try{
             this.notes.set(id-1,note);
             this.noteNames.set(id-1,name);
-            this.createDate.set(id-1,formatDate.getCustomStringDate(date));
+            this.createDate.set(id-1,date);
         }catch(IndexOutOfBoundsException e){
             e.printStackTrace();
         }
