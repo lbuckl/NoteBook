@@ -27,8 +27,10 @@ import com.vados.notebook.main.ItemFragmentNotes;
 import com.vados.notebook.main.MainFragment;
 
 public class MainActivity extends AppCompatActivity {
+    //Для хранения значений сохраняемой темы
     private static String AppTheme = "APP_THEME";
     private static String NameSharedPreference = "LOGIN";
+
     public static Notes notes = new Notes();
     public static FragmentManager fragmentManager;
     public static ItemFragmentNotes itemFragmentNotes = new ItemFragmentNotes();

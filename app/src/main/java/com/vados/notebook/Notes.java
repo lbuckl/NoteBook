@@ -1,17 +1,24 @@
 package com.vados.notebook;
+
+import android.content.Context;
+import android.content.res.Resources;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-
 public class Notes {
+    private ArrayList<String> noteNames = new ArrayList<>();
+    private ArrayList<String> createDate = new ArrayList<>();
+    private ArrayList<String> notes = new ArrayList<>();
 
-    private final ArrayList<String> noteNames = new ArrayList<>();
-    private final ArrayList<String> createDate = new ArrayList<>();
-    private final ArrayList<String> notes = new ArrayList<>();
     Calendar gcalendar = new GregorianCalendar();
     FormatDate formatDate = new FormatDate();
+
+    protected Notes() {
+
+    }
 
     //Создать запись по имени и значению
     public void addNewNote(String name, String note){
@@ -36,11 +43,6 @@ public class Notes {
     //Получаем число заметок
     public int getNotesSize(){
         return noteNames.size();
-    }
-
-    //Получим массив имён
-    public ArrayList<String> getArrayNames(){
-        return noteNames;
     }
 
     //получить Имя по id
@@ -77,11 +79,6 @@ public class Notes {
         }catch(IndexOutOfBoundsException e){
             e.printStackTrace();
         }
-    }
-
-    //записать Дату по id
-    public void setNoteDate(Date date){
-        this.createDate.add(formatDate.getCustomStringDate(date));
     }
 
 }
