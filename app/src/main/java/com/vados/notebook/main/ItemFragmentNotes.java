@@ -82,8 +82,6 @@ public class ItemFragmentNotes extends Fragment {
             // Добавим разделитель карточек
             DividerItemDecoration itemDecoration = new
                     DividerItemDecoration(this.getContext(), LinearLayoutManager.VERTICAL);
-            itemDecoration.setDrawable(this.getResources().getDrawable(R.drawable.separator,
-                    null));
             recyclerView.addItemDecoration(itemDecoration);
 
         }
