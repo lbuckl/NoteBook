@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -61,7 +62,8 @@ public class ItemFragmentNotes extends Fragment {
 
             PlaceholderContent placeholderContent = new PlaceholderContent();
             placeholderContent.clearItems();
-            recyclerView.setAdapter(new MyItemRecyclerViewAdapter(placeholderContent.getItems()));
+
+            //recyclerView.setAdapter(new MyItemRecyclerViewAdapter(placeholderContent.getItems()));
             //ковыряем адаптер
             try{
                 int noteSize = MainActivity.notes.getNotesSize();
@@ -77,6 +79,12 @@ public class ItemFragmentNotes extends Fragment {
                 e.printStackTrace();
             }
             recyclerView.setAdapter(new MyItemRecyclerViewAdapter(placeholderContent.getItems())); //передаём
+            // Добавим разделитель карточек
+            DividerItemDecoration itemDecoration = new
+                    DividerItemDecoration(this.getContext(), LinearLayoutManager.VERTICAL);
+            itemDecoration.setDrawable(this.getResources().getDrawable(R.drawable.separator,
+                    null));
+            recyclerView.addItemDecoration(itemDecoration);
 
         }
         return view;

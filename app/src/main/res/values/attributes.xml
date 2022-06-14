@@ -2,4 +2,5 @@
 <resources>
     <attr name="mainbackground" format="color"/>
     <attr format="reference" name="add_button_icon"/>
+    <color name="cardview_shadow_my_color">#37534C4C</color>
 </resources>
