@@ -20,5 +20,7 @@
     <string name="Exit" translatable="false">Exit</string>
     <string name="Yes" translatable="false">Yes</string>
     <string name="No" translatable="false">No</string>
+    <string name="Change" translatable="false">Change</string>
     <string name="Deleted" translatable="false">Deleted</string>
+    <string name="Error" translatable="false">Error</string>
 </resources>
