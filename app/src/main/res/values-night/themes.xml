@@ -12,8 +12,12 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-        <item name="background">@color/black</item>
-        <item name="mainbackground">@color/black</item>
+        <item name="mainbackground">@color/white</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="add_button_icon">@drawable/ic_button_add_blue</item>
+        <item name="note_icon">@drawable/ic_note_item_dark</item>
+        <!-- menu. -->
+        <item name="popupMenuBackground">@color/cardview_light_background</item>
     </style>
 
     <style name="Theme.Dark" parent="Theme.MaterialComponents.DayNight.NoActionBar">
