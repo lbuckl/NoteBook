@@ -75,7 +75,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
                 switch (item.getItemId()){
                     case R.id.popup_delete:
                         int size = MainActivity.notes.getNotesSize();
-                        MainActivity.notes.deleteNoteForId(holder.mItem.intDI);
+                            MainActivity.notes.deleteNoteForId(holder.mItem.intDI);
                             fragmentManager.beginTransaction()
                                     .replace(R.id.fragment_container, new MainFragment())
                                     .commit();
@@ -89,15 +89,18 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
                             Toast.makeText(activity.getBaseContext(),
                                     resources.getString(R.string.Deleted), Toast.LENGTH_SHORT).show();
                         }
+                        return true;
                     case R.id.popup_change:
                         EnterNoteFragment enterNoteFragment = new EnterNoteFragment(mValues.get(position).intDI);
                         if (!MainActivity.isLandscape){
                             fragmentManager.beginTransaction()
                                     .replace(R.id.fragment_container,enterNoteFragment)
+                                    .addToBackStack("Change")
                                     .commit();
                         }else{
                             fragmentManager.beginTransaction()
                                     .replace(R.id.fragment_container_note,enterNoteFragment)
+                                    .addToBackStack("Change")
                                     .commit();
                         }
                         return true;
