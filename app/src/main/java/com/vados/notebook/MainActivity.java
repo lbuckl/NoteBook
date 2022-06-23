@@ -28,18 +28,24 @@ import android.widget.Toast;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.navigation.NavigationView;
+import com.google.gson.GsonBuilder;
 import com.vados.notebook.main.ItemFragmentNotes;
 import com.vados.notebook.main.MainFragment;
 
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
-    //Для хранения значений сохраняемой темы
+    //Для хранения значений сохраняемой темы и языка
+    private static final String NameSharedPreference = "LOGIN";
     private static final String AppTheme = "APP_THEME";
     private static final String AppLang = "APP_LANG";
-    private static final String NameSharedPreference = "LOGIN";
+    //Для сохранения класса Notes
+    private static final String NameSharedClass= "NOTE_ITEMS";
+    private static final String AppClassNote = "APP_CLASS_NOTE";
 
-    public static Notes notes = new Notes();
+
+    //public static Notes notes = new Notes();
+    public static Notes notes;
     public static FragmentManager fragmentManager;
     public static ItemFragmentNotes itemFragmentNotes = new ItemFragmentNotes();
     public static MainFragment mainFragment = new MainFragment();
@@ -51,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
     String locate;
     public static SharedPreferences sharedPref;
     public static SharedPreferences.Editor editor;
+    public static SharedPreferences sharedPrefClass = null;
     Toolbar toolbar;
     DrawerLayout drawer;
 
@@ -59,6 +66,17 @@ public class MainActivity extends AppCompatActivity {
         setTheme(getAppTheme());
         setNewLocale();
         super.onCreate(savedInstanceState);
+        sharedPrefClass = getPreferences(MODE_PRIVATE);
+
+        String savedNote = sharedPrefClass.getString(AppClassNote, null);
+        if (savedNote == null) {
+            notes = new Notes();
+            Toast.makeText(this, "Empty", Toast.LENGTH_SHORT).show();
+        } else {
+            notes = new GsonBuilder().create().fromJson(savedNote,
+                    Notes.class);
+        }
+
         setContentView(R.layout.activity_main);
         Initialization();
         ClickListener();
