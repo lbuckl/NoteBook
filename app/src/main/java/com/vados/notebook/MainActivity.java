@@ -31,10 +31,13 @@ import com.google.android.material.navigation.NavigationView;
 import com.vados.notebook.main.ItemFragmentNotes;
 import com.vados.notebook.main.MainFragment;
 
+import java.util.Locale;
+
 public class MainActivity extends AppCompatActivity {
     //Для хранения значений сохраняемой темы
-    private static String AppTheme = "APP_THEME";
-    private static String NameSharedPreference = "LOGIN";
+    private static final String AppTheme = "APP_THEME";
+    private static final String AppLang = "APP_LANG";
+    private static final String NameSharedPreference = "LOGIN";
 
     public static Notes notes = new Notes();
     public static FragmentManager fragmentManager;
@@ -45,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
     public static AboutAppFragment aboutAppFragment;
     public static boolean isLandscape;
     public static int themID;
+    String locate;
     public static SharedPreferences sharedPref;
     public static SharedPreferences.Editor editor;
     Toolbar toolbar;
@@ -53,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(getAppTheme());
+        setNewLocale();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Initialization();
@@ -252,5 +257,24 @@ public class MainActivity extends AppCompatActivity {
             FragmentManager.BackStackEntry first = fragmentManager.getBackStackEntryAt(0);
             fragmentManager.popBackStack(first.getId(),FragmentManager.POP_BACK_STACK_INCLUSIVE);
         }
+    }
+
+    public void setNewLocale(){
+        Context context = getBaseContext();
+        sharedPref = getSharedPreferences(NameSharedPreference,MODE_PRIVATE);
+        locate = sharedPref.getString(AppLang, "en");
+        Locale locale = new Locale(locate);
+        Locale.setDefault(locale);
+
+        //Изменяем язык конфигурации джава
+        Configuration configuration = new Configuration();
+        configuration.setLocale(locale);
+        context.createConfigurationContext(configuration);
+
+        //Изменяем язык ресурсов
+        Resources resources = context.getResources();
+        Configuration configuration1 = resources.getConfiguration();
+        configuration1.setLocale(locale);
+        resources.updateConfiguration(configuration1, resources.getDisplayMetrics());
     }
 }

@@ -43,7 +43,7 @@ public class NoteFragment extends Fragment {
         TextView textView_Date = view.findViewById(R.id.textView_Date);
 
         textInput_Name.setText(MainActivity.notes.getNameForId(chooseID-1));
-        textInput_Note.setText("     " + MainActivity.notes.getNoteForId(chooseID-1));
+        textInput_Note.setText(MainActivity.notes.getNoteForId(chooseID-1));
         textView_Date.setText(MainActivity.notes.getDateForId(chooseID-1));
     }
 }

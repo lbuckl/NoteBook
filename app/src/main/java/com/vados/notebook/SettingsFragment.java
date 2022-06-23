@@ -28,6 +28,7 @@ import java.util.Locale;
 
 public class SettingsFragment extends Fragment {
     private static final String AppTheme = "APP_THEME";
+    private static final String AppLang = "APP_LANG";
     private static final String NameSharedPreference = "LOGIN";
 
     private TextView textView_lang;
@@ -153,7 +154,9 @@ public class SettingsFragment extends Fragment {
                 setNewLocale(chooseLang);
                 setLangInValue();
                 isChose = true;
+                setAppLang();
             }
+
 
             if (isChose) restartActivity();
             else {
@@ -212,6 +215,15 @@ public class SettingsFragment extends Fragment {
         // Настройки сохраняются посредством специального класса editor.
         MainActivity.editor = MainActivity.sharedPref.edit();
         MainActivity.editor.putInt(AppTheme, codeStyle);
+        MainActivity.editor.apply();
+    }
+
+    // Сохранение настроек языка
+    private void setAppLang() {
+        MainActivity.sharedPref = context.getSharedPreferences(NameSharedPreference,context.MODE_PRIVATE);
+        // Настройки сохраняются посредством специального класса editor.
+        MainActivity.editor = MainActivity.sharedPref.edit();
+        MainActivity.editor.putString(AppLang, chooseLang);
         MainActivity.editor.apply();
     }
 
