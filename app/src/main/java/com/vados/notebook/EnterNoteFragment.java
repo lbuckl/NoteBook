@@ -114,7 +114,6 @@ public class EnterNoteFragment extends Fragment {
         button_apply.setOnClickListener(v -> {
             String nName = textInput_NoteName.getText().toString();
             String nValue = textInput_Note.getText().toString();
-            saveClassNote();
             if (replaseID > 0){
                 if (selectDate != null) MainActivity.notes.setNote(replaseID,nName,nValue,selectDate);
                 else MainActivity.notes.setNote(replaseID,nName,nValue);
@@ -124,7 +123,7 @@ public class EnterNoteFragment extends Fragment {
             }
 
             selectDate = null;
-
+            saveClassNote();
             if (!isLandscape){
                 fragmentManager.beginTransaction()
                         .replace(R.id.fragment_container,MainActivity.mainFragment)
