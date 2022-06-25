@@ -13,6 +13,7 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.GsonBuilder;
 import com.vados.notebook.main.ItemFragmentNotes;
 import com.vados.notebook.main.MainFragment;
 import com.vados.notebook.placeholder.PlaceholderContent.PlaceholderItem;
@@ -21,7 +22,7 @@ import com.vados.notebook.databinding.FragmentItemNotesBinding;
 import java.util.List;
 
 public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder> {
-
+    private static final String AppClassNote = "APP_CLASS_NOTE";
     private final List<PlaceholderItem> mValues;
     FormatDate formatDate = new FormatDate();
     FragmentManager fragmentManager;
@@ -76,6 +77,8 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
                     case R.id.popup_delete:
                         int size = MainActivity.notes.getNotesSize();
                             MainActivity.notes.deleteNoteForId(holder.mItem.intDI);
+
+                        saveClassNote();
                             fragmentManager.beginTransaction()
                                     .replace(R.id.fragment_container, new MainFragment())
                                     .commit();
@@ -136,5 +139,10 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
         public String toString() {
             return super.toString() + " '" + mContentView.getText() + "'";
         }
+    }
+
+    void saveClassNote(){
+        String jsonNote = new GsonBuilder().create().toJson(MainActivity.notes);
+        MainActivity.sharedPrefClass.edit().putString(AppClassNote, jsonNote).apply();
     }
 }

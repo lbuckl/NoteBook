@@ -34,7 +34,6 @@ public class EnterNoteFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";*/
 
     //Для сохранения класса Notes
-    private static final String NameSharedClass= "NOTE_ITEMS";
     private static final String AppClassNote = "APP_CLASS_NOTE";
 
     // TODO: Rename and change types of parameters
