@@ -19,6 +19,8 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.gson.GsonBuilder;
 
 import java.util.Locale;
@@ -31,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
     //Для сохранения класса Notes
     private static final String NameSharedClass= "NOTE_ITEMS";
     private static final String AppClassNote = "APP_CLASS_NOTE";
-
 
     public static Notes notes;
     public static FragmentManager fragmentManager;
@@ -48,6 +49,9 @@ public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
     DrawerLayout drawer;
 
+    public static FirebaseFirestore store = FirebaseFirestore.getInstance();
+    public static CollectionReference collection = store.collection("key3");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(getAppTheme());
@@ -63,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
             notes = new GsonBuilder().create().fromJson(savedNote,
                     Notes.class);
         }
-
         setContentView(R.layout.activity_main);
         Initialization();
         ClickListener();
@@ -242,7 +245,6 @@ public class MainActivity extends AppCompatActivity {
                 return R.style.Theme_NoteBook;
         }
     }
-
 
     // Чтение настроек, параметр стиля/темы
     private int getCodeStyle(){

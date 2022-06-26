@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import android.content.res.Configuration;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,7 +19,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.gson.GsonBuilder;
 
 import java.util.Calendar;
@@ -34,6 +37,7 @@ public class EnterNoteFragment extends Fragment {
 
     //Для сохранения класса Notes
     private static final String AppClassNote = "APP_CLASS_NOTE";
+    private static final String TAG = "warning";
 
     // TODO: Rename and change types of parameters
     /*private String mParam1;
@@ -118,9 +122,10 @@ public class EnterNoteFragment extends Fragment {
                 if (selectDate != null) MainActivity.notes.addNewNote(nName,nValue,selectDate);
                 else MainActivity.notes.addNewNote(nName,nValue);
             }
-
-            selectDate = null;
             saveClassNote();
+            saveDataToFireBase();
+            selectDate = null;
+
             if (!isLandscape){
                 fragmentManager.beginTransaction()
                         .replace(R.id.fragment_container,MainActivity.mainFragment)
@@ -172,8 +177,22 @@ public class EnterNoteFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
     }
 
-    void saveClassNote(){
+    private void saveClassNote(){
         String jsonNote = new GsonBuilder().create().toJson(MainActivity.notes);
         MainActivity.sharedPrefClass.edit().putString(AppClassNote, jsonNote).apply();
+    }
+
+    private void saveDataToFireBase(){
+        MainActivity.collection.add(MainActivity.notes)
+                .addOnSuccessListener(documentReference -> {
+            Toast.makeText(getActivity().getBaseContext(),
+                    "Успешно", Toast.LENGTH_SHORT).show();
+        })
+                .addOnFailureListener(e -> {
+
+                    Log.w(TAG, "Error adding document", e);
+                    Toast.makeText(getActivity().getBaseContext(),
+                            "Провал", Toast.LENGTH_SHORT).show();
+                });
     }
 }

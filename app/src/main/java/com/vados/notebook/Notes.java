@@ -1,8 +1,5 @@
 package com.vados.notebook;
 
-import android.content.Context;
-import android.content.res.Resources;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -24,6 +21,7 @@ public class Notes {
         this.noteNames.add(name);
         this.notes.add(note);
         this.createDate.add(gcalendar.getTime());
+        addObjToFireStore(noteNames.size()-1);
     }
 
     //Создать запись по имени, значению и времени
@@ -31,6 +29,7 @@ public class Notes {
         this.noteNames.add(name);
         this.notes.add(note);
         this.createDate.add(date);
+        addObjToFireStore(noteNames.size()-1);
     }
 
     public void deleteNoteForId(int id){
@@ -81,4 +80,9 @@ public class Notes {
         }
     }
 
+    public void addObjToFireStore(int id){
+        //MainActivity.collection.add(MainActivity.notes);
+        MainActivity.collection.add(new Note(noteNames.get(id),notes.get(id),createDate.get(id)));
+    }
 }
+
