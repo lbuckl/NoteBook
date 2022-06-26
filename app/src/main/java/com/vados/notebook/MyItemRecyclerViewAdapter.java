@@ -7,14 +7,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.Activity;
 import android.content.res.Resources;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.GsonBuilder;
-import com.vados.notebook.main.ItemFragmentNotes;
 import com.vados.notebook.main.MainFragment;
 import com.vados.notebook.placeholder.PlaceholderContent.PlaceholderItem;
 import com.vados.notebook.databinding.FragmentItemNotesBinding;
@@ -26,6 +24,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
     private final List<PlaceholderItem> mValues;
     FormatDate formatDate = new FormatDate();
     FragmentManager fragmentManager;
+    Activity activity;
     //Конструктор
     public MyItemRecyclerViewAdapter(List<PlaceholderItem> items) {
         mValues = items;
@@ -37,7 +36,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
+        activity = MainActivity.mainFragment.getActivity();
         return new ViewHolder(FragmentItemNotesBinding
                 .inflate(LayoutInflater
                         .from(parent.getContext()), parent, false));
@@ -68,7 +67,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
         });
 
         holder.itemView.setOnLongClickListener(v -> {
-            Activity activity = MainActivity.mainFragment.getActivity();
+            //Activity activity = MainActivity.mainFragment.getActivity();
             PopupMenu popupMenu = new PopupMenu(activity,v);
             activity.getMenuInflater().inflate(R.menu.menu_popup_note,popupMenu.getMenu());
             Resources resources = activity.getBaseContext().getResources();
@@ -77,7 +76,6 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
                     case R.id.popup_delete:
                         int size = MainActivity.notes.getNotesSize();
                             MainActivity.notes.deleteNoteForId(holder.mItem.intDI);
-
                         saveClassNote();
                             fragmentManager.beginTransaction()
                                     .replace(R.id.fragment_container, new MainFragment())

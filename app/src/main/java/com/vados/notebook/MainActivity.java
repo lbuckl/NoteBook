@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
                     toast1.show();
                     return true;
             case R.id.settings:
-                clearBackStack();
+                //clearBackStack();
                 settingsFragment = new SettingsFragment();
                 if (isLandscape) {
                     fragmentManager
@@ -203,13 +203,11 @@ public class MainActivity extends AppCompatActivity {
                             fragmentManager
                                     .beginTransaction()
                                     .replace(R.id.fragment_container_note,settingsFragment)
-                                    .addToBackStack("Settings")
                                     .commit();
                         }else{
                             fragmentManager
                                     .beginTransaction()
                                     .replace(R.id.fragment_container,settingsFragment)
-                                    .addToBackStack("Settings")
                                     .commit();
                         }
                         return true;

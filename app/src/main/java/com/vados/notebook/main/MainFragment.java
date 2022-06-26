@@ -47,13 +47,11 @@ public class MainFragment extends Fragment {
                 MainActivity.fragmentManager
                         .beginTransaction()
                         .replace(R.id.fragment_container_note,MainActivity.enterNoteFragment)
-                        .addToBackStack("EnterFragment")
                         .commit();
             }else{
                 MainActivity.fragmentManager
                         .beginTransaction()
                         .replace(R.id.fragment_container,MainActivity.enterNoteFragment)
-                        .addToBackStack("EnterFragment")
                         .commit();
             }
         });
