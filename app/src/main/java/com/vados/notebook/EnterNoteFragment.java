@@ -81,7 +81,6 @@ public class EnterNoteFragment extends Fragment {
 
         //скрываем меню
         setHasOptionsMenu(true);
-
         return view;
     }
 

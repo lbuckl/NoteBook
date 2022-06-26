@@ -33,10 +33,8 @@ public class MainActivity extends AppCompatActivity {
     private static final String AppClassNote = "APP_CLASS_NOTE";
 
 
-    //public static Notes notes = new Notes();
     public static Notes notes;
     public static FragmentManager fragmentManager;
-    public static ItemFragmentNotes itemFragmentNotes = new ItemFragmentNotes();
     public static MainFragment mainFragment = new MainFragment();
     public static EnterNoteFragment enterNoteFragment;
     public static SettingsFragment settingsFragment;

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.app.Activity;
+import android.content.Context;
 import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
     FormatDate formatDate = new FormatDate();
     FragmentManager fragmentManager;
     Activity activity;
+    ViewHolder viewHolder;
     //Конструктор
     public MyItemRecyclerViewAdapter(List<PlaceholderItem> items) {
         mValues = items;
@@ -33,14 +35,16 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(FragmentItemNotesBinding
+        viewHolder = new ViewHolder(FragmentItemNotesBinding
                 .inflate(LayoutInflater
                         .from(parent.getContext()), parent, false));
+        return viewHolder;
     }
 
     //метод отвечает за связь java объекта и View
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
+        activity = MainActivity.mainFragment.getActivity();
         holder.mItem = mValues.get(position);
         holder.mIdView.setText(mValues.get(position).id);
         holder.mContentView.setText(mValues.get(position).content);
@@ -62,10 +66,16 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
             }
         });
 
-        holder.itemView.setOnLongClickListener(v -> {
-            activity = MainActivity.mainFragment.getActivity();
-            PopupMenu popupMenu = new PopupMenu(activity,v);
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
 
+                return false;
+            }
+        });
+
+        holder.itemView.setOnLongClickListener(v -> {
+            PopupMenu popupMenu = new PopupMenu(activity,v);
             activity.getMenuInflater().inflate(R.menu.menu_popup_note,popupMenu.getMenu());
             Resources resources = activity.getBaseContext().getResources();
             popupMenu.setOnMenuItemClickListener(item -> {
@@ -142,12 +152,12 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
     void reloadView(){
         if (!MainActivity.isLandscape){
             fragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container,new MainFragment())
+                    .add(R.id.fragment_container, new MainFragment())
                     .commit();
         }else{
             fragmentManager.beginTransaction()
                     .replace(R.id.fragment_container_note,new EmptyFragment())
-                    .replace(R.id.fragment_container, new MainFragment())
+                    .add(R.id.fragment_container, new MainFragment())
                     .commit();
         }
     }
