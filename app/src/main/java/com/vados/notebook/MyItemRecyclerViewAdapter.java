@@ -3,20 +3,17 @@ package com.vados.notebook;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.Activity;
 import android.content.res.Resources;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.gson.GsonBuilder;
-import com.vados.notebook.main.MainFragment;
 import com.vados.notebook.placeholder.PlaceholderContent.PlaceholderItem;
 import com.vados.notebook.databinding.FragmentItemNotesBinding;
-
 import java.util.List;
 
 public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder> {
@@ -36,7 +33,6 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        activity = MainActivity.mainFragment.getActivity();
         return new ViewHolder(FragmentItemNotesBinding
                 .inflate(LayoutInflater
                         .from(parent.getContext()), parent, false));
@@ -67,8 +63,9 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
         });
 
         holder.itemView.setOnLongClickListener(v -> {
-            //Activity activity = MainActivity.mainFragment.getActivity();
+            activity = MainActivity.mainFragment.getActivity();
             PopupMenu popupMenu = new PopupMenu(activity,v);
+
             activity.getMenuInflater().inflate(R.menu.menu_popup_note,popupMenu.getMenu());
             Resources resources = activity.getBaseContext().getResources();
             popupMenu.setOnMenuItemClickListener(item -> {
@@ -76,17 +73,15 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
                     case R.id.popup_delete:
                         int size = MainActivity.notes.getNotesSize();
                             MainActivity.notes.deleteNoteForId(holder.mItem.intDI);
-                        saveClassNote();
-                            fragmentManager.beginTransaction()
-                                    .replace(R.id.fragment_container, new MainFragment())
-                                    .commit();
-                        //ItemFragmentNotes.myItemRecyclerViewAdapter.notifyItemRemoved(holder.mItem.intDI+1);
+                            saveClassNote();
+                        reloadView();
                         //пытаюсь получить данные по размеру списка до удаления и если не выходит, то значит точно удалилось
                         try{
                             MainActivity.notes.getNameForId(size-1);
                             Toast.makeText(activity.getBaseContext(),
                                     resources.getString(R.string.Error), Toast.LENGTH_SHORT).show();
                         }catch (IndexOutOfBoundsException e){
+
                             Toast.makeText(activity.getBaseContext(),
                                     resources.getString(R.string.Deleted), Toast.LENGTH_SHORT).show();
                         }
@@ -142,5 +137,18 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
     void saveClassNote(){
         String jsonNote = new GsonBuilder().create().toJson(MainActivity.notes);
         MainActivity.sharedPrefClass.edit().putString(AppClassNote, jsonNote).apply();
+    }
+
+    void reloadView(){
+        if (!MainActivity.isLandscape){
+            fragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container,new MainFragment())
+                    .commit();
+        }else{
+            fragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container_note,new EmptyFragment())
+                    .replace(R.id.fragment_container, new MainFragment())
+                    .commit();
+        }
     }
 }

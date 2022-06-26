@@ -1,4 +1,4 @@
-package com.vados.notebook.main;
+package com.vados.notebook;
 
 import android.content.Context;
 import android.os.Bundle;

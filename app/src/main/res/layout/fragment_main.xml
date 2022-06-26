@@ -5,12 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/mainbackground"
-    tools:context=".main.MainFragment">
+    tools:context=".MainFragment">
 
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"
-        android:name="com.vados.notebook.main.ItemFragmentNotes"
+        android:name="com.vados.notebook.ItemFragmentNotes"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

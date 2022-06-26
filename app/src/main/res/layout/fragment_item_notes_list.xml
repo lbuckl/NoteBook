@@ -8,5 +8,5 @@
     android:layout_height="wrap_content"
     android:background="?attr/mainbackground"
     app:layoutManager="LinearLayoutManager"
-    tools:context=".main.ItemFragmentNotes"
+    tools:context=".ItemFragmentNotes"
     tools:listitem="@layout/fragment_item_notes" />

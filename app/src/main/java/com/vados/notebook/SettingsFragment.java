@@ -22,8 +22,6 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.vados.notebook.main.MainFragment;
-
 import java.util.Locale;
 
 public class SettingsFragment extends Fragment {
@@ -118,7 +116,6 @@ public class SettingsFragment extends Fragment {
             }
         });
 
-
         //Спинер изменения Стиля
         spinner_them.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -157,7 +154,6 @@ public class SettingsFragment extends Fragment {
                 setAppLang();
             }
 
-
             if (isChose) restartActivity();
             else {
                 if (!isLandscape){
@@ -167,7 +163,7 @@ public class SettingsFragment extends Fragment {
                 }else{
                     fragmentManager.beginTransaction()
                             .replace(R.id.fragment_container_note,new EmptyFragment())
-                            .replace(R.id.fragment_container, new MainFragment())
+                            .replace(R.id.fragment_container, MainActivity.mainFragment)
                             .commit();
                 }
             }

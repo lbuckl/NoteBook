@@ -20,7 +20,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.gson.GsonBuilder;
-import com.vados.notebook.main.MainFragment;
 
 import java.util.Calendar;
 import java.util.Date;
