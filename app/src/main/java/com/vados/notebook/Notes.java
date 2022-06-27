@@ -81,8 +81,8 @@ public class Notes {
     }
 
     public void addObjToFireStore(int id){
-        //MainActivity.collection.add(MainActivity.notes);
-        MainActivity.collection.add(new Note(noteNames.get(id),notes.get(id),createDate.get(id)));
+        Note note = new Note(noteNames.get(id),notes.get(id));
+        MainActivity.collection.document("note").set(note);
     }
 }
 

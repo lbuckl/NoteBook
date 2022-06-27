@@ -19,9 +19,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.gson.GsonBuilder;
 
 import java.util.Calendar;
@@ -123,7 +120,6 @@ public class EnterNoteFragment extends Fragment {
                 else MainActivity.notes.addNewNote(nName,nValue);
             }
             saveClassNote();
-            saveDataToFireBase();
             selectDate = null;
 
             if (!isLandscape){
@@ -180,19 +176,5 @@ public class EnterNoteFragment extends Fragment {
     private void saveClassNote(){
         String jsonNote = new GsonBuilder().create().toJson(MainActivity.notes);
         MainActivity.sharedPrefClass.edit().putString(AppClassNote, jsonNote).apply();
-    }
-
-    private void saveDataToFireBase(){
-        MainActivity.collection.add(MainActivity.notes)
-                .addOnSuccessListener(documentReference -> {
-            Toast.makeText(getActivity().getBaseContext(),
-                    "Успешно", Toast.LENGTH_SHORT).show();
-        })
-                .addOnFailureListener(e -> {
-
-                    Log.w(TAG, "Error adding document", e);
-                    Toast.makeText(getActivity().getBaseContext(),
-                            "Провал", Toast.LENGTH_SHORT).show();
-                });
     }
 }

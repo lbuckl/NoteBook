@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "240478554069",
-    "project_id": "notebook-6cefa",
-    "storage_bucket": "notebook-6cefa.appspot.com"
+    "project_number": "765396860333",
+    "project_id": "notebook2-13533",
+    "storage_bucket": "notebook2-13533.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:240478554069:android:4142ee376c60a7e78a9f5c",
+        "mobilesdk_app_id": "1:765396860333:android:e5d6a1801261dbc9a8b524",
         "android_client_info": {
           "package_name": "com.vados.notebook"
         }
       },
       "oauth_client": [
         {
-          "client_id": "240478554069-73fs6qs9fsi1cnnr63i97ddvpriijtkr.apps.googleusercontent.com",
+          "client_id": "765396860333-t57dlstipi8m3d80n4n7803nj2vtvn3c.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC6XUhu16vSQ9fnAwM59vmlgXZJcsAmCtk"
+          "current_key": "AIzaSyBda1_cXmdoLZX0eM8Fti7hBxoaSNFpR68"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "240478554069-73fs6qs9fsi1cnnr63i97ddvpriijtkr.apps.googleusercontent.com",
+              "client_id": "765396860333-t57dlstipi8m3d80n4n7803nj2vtvn3c.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
