@@ -21,7 +21,7 @@ public class Notes {
         this.noteNames.add(name);
         this.notes.add(note);
         this.createDate.add(gcalendar.getTime());
-        addObjToFireStore(noteNames.size()-1);
+        //addObjToFireStore(noteNames.size()-1);
     }
 
     //Создать запись по имени, значению и времени
@@ -29,7 +29,7 @@ public class Notes {
         this.noteNames.add(name);
         this.notes.add(note);
         this.createDate.add(date);
-        addObjToFireStore(noteNames.size()-1);
+        //addObjToFireStore(noteNames.size()-1);
     }
 
     public void deleteNoteForId(int id){
@@ -82,7 +82,7 @@ public class Notes {
 
     public void addObjToFireStore(int id){
         Note note = new Note(noteNames.get(id),notes.get(id));
-        MainActivity.collection.document("note").set(note);
+        //MainActivity.collection.document("note").set(note);
     }
 }
 

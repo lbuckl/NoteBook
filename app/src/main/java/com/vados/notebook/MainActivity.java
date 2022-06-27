@@ -19,8 +19,8 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.FirebaseFirestore;
+//import com.google.firebase.firestore.CollectionReference;
+//import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.gson.GsonBuilder;
 
 import java.util.Locale;
@@ -49,8 +49,8 @@ public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
     DrawerLayout drawer;
 
-    public static FirebaseFirestore store = FirebaseFirestore.getInstance();
-    public static CollectionReference collection = store.collection("key3");
+    //public static FirebaseFirestore store = FirebaseFirestore.getInstance();
+    //public static CollectionReference collection = store.collection("key3");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void Initialization(){
+
         //верхнее меню
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
