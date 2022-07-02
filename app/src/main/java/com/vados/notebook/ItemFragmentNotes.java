@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import com.vados.notebook.placeholder.PlaceholderContent;
 
@@ -26,21 +27,10 @@ public class ItemFragmentNotes extends Fragment {
     private int mColumnCount = 1;
 
     /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
+     * Обязательный элемент, не удалять!!!
      */
     public ItemFragmentNotes() {
     }
-
-    // TODO: Customize parameter initialization
-    /*@SuppressWarnings("unused")
-    public static ItemFragmentNotes newInstance(int columnCount) {
-        ItemFragmentNotes fragment = new ItemFragmentNotes();
-        Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
-        fragment.setArguments(args);
-        return fragment;
-    }*/
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,7 +47,7 @@ public class ItemFragmentNotes extends Fragment {
         View view = inflater.inflate(R.layout.fragment_item_notes_list, container, false);
 
         // Set the adapter
-        /*if (view instanceof RecyclerView) {
+        if (view instanceof RecyclerView) {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
             if (mColumnCount <= 1) {
@@ -65,27 +55,27 @@ public class ItemFragmentNotes extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyItemRecyclerViewAdapter(PlaceholderContent.ITEMS));
-        }*/
-        RecyclerView recyclerView = (RecyclerView) view;
 
-        RecyclerView.Adapter adapter = new RecyclerView.Adapter() {
-            @NonNull
-            @Override
-            public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                return null;
+            PlaceholderContent placeholderContent = new PlaceholderContent();
+            placeholderContent.clearItems();
+            recyclerView.setAdapter(new MyItemRecyclerViewAdapter(placeholderContent.getItems()));
+            //ковыряем адаптер
+            try{
+                int noteSize = MainActivity.notes.getNotesSize();
+                if (noteSize >=1) {
+                    for (int i = 1; i <= noteSize; i++) {
+                        placeholderContent.addItem(i,
+                                MainActivity.notes.getNameForId(i - 1),
+                                MainActivity.notes.getNoteForId(i - 1),
+                                MainActivity.notes.getDateForId(i - 1));
+                    }
+                }
+            }catch (IndexOutOfBoundsException e){
+                e.printStackTrace();
             }
+            recyclerView.setAdapter(new MyItemRecyclerViewAdapter(placeholderContent.getItems())); //передаём
 
-            @Override
-            public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-
-            }
-
-            @Override
-            public int getItemCount() {
-                return MainActivity.notes.getNotesSize();
-            }
-        };
+        }
         return view;
     }
 

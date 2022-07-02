@@ -1,6 +1,7 @@
 package com.vados.notebook.placeholder;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,41 +14,27 @@ import java.util.Map;
  */
 public class PlaceholderContent {
 
-    /**
-     * An array of sample (placeholder) items.
-     */
-    public static final List<PlaceholderItem> ITEMS = new ArrayList<PlaceholderItem>();
+    //Список элементов
+    public static final List<PlaceholderItem> ITEMS = new ArrayList<>();
 
     /**
      * A map of sample (placeholder) items, by ID.
      */
-    public static final Map<String, PlaceholderItem> ITEM_MAP = new HashMap<String, PlaceholderItem>();
+    public static final Map<String, PlaceholderItem> ITEM_MAP = new HashMap<>();
 
-    private static final int COUNT = 25;
-
-    static {
-        // Add some sample items.
-        for (int i = 1; i <= COUNT; i++) {
-            addItem(createPlaceholderItem(i));
-        }
+    public List<PlaceholderItem> getItems() {
+        return ITEMS;
     }
 
-    private static void addItem(PlaceholderItem item) {
-        ITEMS.add(item);
-        ITEM_MAP.put(item.id, item);
+    public void addItem(int position, String noteName, String note, Date noteDate) {
+        ITEMS.add(new PlaceholderItem(position, noteName, note,noteDate));
+
+        //ITEM_MAP.put(new PlaceholderItem(String.valueOf(position), noteName, note)
+        // .id, new PlaceholderItem(String.valueOf(position), noteName, note));
     }
 
-    private static PlaceholderItem createPlaceholderItem(int position) {
-        return new PlaceholderItem(String.valueOf(position), "Item " + position, makeDetails(position));
-    }
-
-    private static String makeDetails(int position) {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Details about Item: ").append(position);
-        for (int i = 0; i < position; i++) {
-            builder.append("\nMore details information here.");
-        }
-        return builder.toString();
+    public void clearItems(){
+        ITEMS.clear();
     }
 
     /**
@@ -55,11 +42,15 @@ public class PlaceholderContent {
      */
     public static class PlaceholderItem {
         public final String id;
+        public int intDI;
         public final String content;
         public final String details;
+        public final Date noteDate;
 
-        public PlaceholderItem(String id, String content, String details) {
-            this.id = id;
+        public PlaceholderItem(int id, String content, String details, Date date) {
+            this.noteDate = date;
+            this.intDI = id;
+            this.id = String.valueOf(id);
             this.content = content;
             this.details = details;
         }

@@ -1,5 +1,14 @@
 <resources>
-    <string name="app_name">NoteBook</string>
-    <string name="add">ADD</string>
-    <string name="settings">Settings</string>
+    <string name="app_name">Заметки</string>
+    <string name="add">Добавить</string>
+    <string name="settings">Настройки</string>
+    <string name="noteName">Наименование</string>
+    <string name="description">Описание</string>
+    <string name="date">Дата</string>
+    <string name="apply">Применить</string>
+    <string name="delete">Удалить</string>
+    <string name="select">Выбрать</string>
+
+
+
 </resources>

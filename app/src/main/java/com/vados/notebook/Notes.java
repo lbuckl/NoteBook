@@ -1,27 +1,43 @@
 package com.vados.notebook;
 
-import java.sql.Time;
+import android.icu.text.DateFormat;
+import android.icu.text.SimpleDateFormat;
+
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.PriorityQueue;
+import java.util.TimeZone;
 
 public class Notes {
 
-    private ArrayList<String> noteNames;
-    private ArrayList<Date> createDate;
-    private ArrayList<String> notes;
-    GregorianCalendar gcalendar = new GregorianCalendar();
+    private ArrayList<String> noteNames = new ArrayList<>();
+    private ArrayList<Date> createDate = new ArrayList<>();
+    private ArrayList<String> notes = new ArrayList<>();
+    Calendar gcalendar = new GregorianCalendar();
+    {
+        //gcalendar.add(Calendar.HOUR,5);
+    }
 
     //Создать запись только по имени
     public void addNewNote(String name){
-
+        this.noteNames.add(name);
+        this.notes.add("");
+        this.createDate.add(gcalendar.getTime());
     }
 
     //Создать запись только по имени и значению
     public void addNewNote(String name, String note){
-        noteNames.add(name);
-        notes.add(note);
-        gcalendar.getTime();
+        this.noteNames.add(name);
+        this.notes.add(note);
+        this.createDate.add(gcalendar.getTime());
+    }
+
+    public void deleteNoteForId(int id){
+        noteNames.remove(id-1);
+        notes.remove(id-1);
+        createDate.remove(id-1);
     }
 
     //Получаем число заметок
@@ -40,7 +56,7 @@ public class Notes {
     }
 
     //получить Дату и время по id
-    public Date getTimeForId(int id){
+    public Date getDateForId(int id){
         return createDate.get(id);
     }
 
@@ -49,17 +65,30 @@ public class Notes {
         return notes.get(id);
     }
 
-    //записать Имя по id
-    public void setNoteName(String name){
-        noteNames.add(name);
+    //записать имя и значение по id
+    public void setNote(int id,String name, String note){
+        try{
+            this.notes.set(id-1,note);
+            this.noteNames.set(id-1,name);
+        }catch(IndexOutOfBoundsException e){
+            e.printStackTrace();
+        }
     }
-    //записать Значение по id
-    public void setNote(String note){
-        notes.add(note);
+
+    //записать имя, значение и время по id
+    public void setNote(int id,String name, String note, Date date){
+        try{
+            this.notes.set(id-1,note);
+            this.noteNames.set(id-1,name);
+            this.createDate.set(id-1,date);
+        }catch(IndexOutOfBoundsException e){
+            e.printStackTrace();
+        }
     }
+
     //записать Дату по id
     public void setNoteDate(Date date){
-        createDate.add(date);
+        this.createDate.add(date);
     }
 
 }
