@@ -1,14 +1,26 @@
 <resources>
-    <string name="app_name">Заметки</string>
-    <string name="add">Добавить</string>
-    <string name="settings">Настройки</string>
-    <string name="noteName">Наименование</string>
-    <string name="description">Описание</string>
-    <string name="date">Дата</string>
-    <string name="apply">Применить</string>
-    <string name="delete">Удалить</string>
-    <string name="select">Выбрать</string>
-
-
-
+    <string name="app_name" translatable="false">Заметки</string>
+    <string name="add" translatable="false">Добавить</string>
+    <string name="settings" translatable="false">Настройки</string>
+    <string name="noteName" translatable="false">Наименование</string>
+    <string name="description" translatable="false">Описание</string>
+    <string name="date" translatable="false">Дата</string>
+    <string name="apply" translatable="false">Применить</string>
+    <string name="delete" translatable="false">Удалить</string>
+    <string name="select" translatable="false">Выбрать</string>
+    <string name="Lang" translatable="false">Язык</string>
+    <string name="Them" translatable="false">Тема</string>
+    <string name="Param" translatable="false">Параметр</string>
+    <string name="Value" translatable="false">Значение</string>
+    <string name="Search" translatable="false">Поиск</string>
+    <string name="AboutApp" translatable="false">О приложении</string>
+    <string name="App" translatable="false">Приложение</string>
+    <string name="VersionApp" translatable="false">Версия</string>
+    <string name="Author" translatable="false">Автор</string>
+    <string name="Exit" translatable="false">Выход</string>
+    <string name="Yes" translatable="false">Да</string>
+    <string name="No" translatable="false">Нет</string>
+    <string name="Change" translatable="false">Изменить</string>
+    <string name="Deleted" translatable="false">Удалено</string>
+    <string name="Error" translatable="false">Ошибка</string>
 </resources>

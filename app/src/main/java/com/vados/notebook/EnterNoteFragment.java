@@ -10,12 +10,16 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import android.content.res.Configuration;
 
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
+import com.google.gson.GsonBuilder;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -28,6 +32,10 @@ public class EnterNoteFragment extends Fragment {
     /*private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";*/
 
+    //Для сохранения класса Notes
+    private static final String AppClassNote = "APP_CLASS_NOTE";
+    private static final String TAG = "warning";
+
     // TODO: Rename and change types of parameters
     /*private String mParam1;
     private String mParam2;*/
@@ -36,7 +44,7 @@ public class EnterNoteFragment extends Fragment {
     int replaseID = 0;
     Date selectDate = null;
     Calendar gcalendar = new GregorianCalendar();
-
+    FormatDate formatDate = new FormatDate();
 
     public EnterNoteFragment() {
     }
@@ -71,7 +79,9 @@ public class EnterNoteFragment extends Fragment {
         //Проверяем на поворот экрана в горизонталь. true - значи повёрнут
         isLandscape = getResources().getConfiguration().orientation ==
                 Configuration.ORIENTATION_LANDSCAPE;
-        //gcalendar.add(Calendar.HOUR,5);
+
+        //скрываем меню
+        setHasOptionsMenu(true);
         return view;
     }
 
@@ -90,7 +100,7 @@ public class EnterNoteFragment extends Fragment {
         if (replaseID > 0){
             textInput_NoteName.setText(MainActivity.notes.getNameForId(replaseID-1));
             textInput_Note.setText(MainActivity.notes.getNoteForId(replaseID-1));
-            textView_Date.setText(String.valueOf(MainActivity.notes.getDateForId(replaseID-1)));
+            textView_Date.setText(MainActivity.notes.getDateForId(replaseID-1));
             button_delete.setVisibility(View.VISIBLE);
             button_delete.setClickable(true);
         }
@@ -102,41 +112,39 @@ public class EnterNoteFragment extends Fragment {
         button_apply.setOnClickListener(v -> {
             String nName = textInput_NoteName.getText().toString();
             String nValue = textInput_Note.getText().toString();
-
             if (replaseID > 0){
                 if (selectDate != null) MainActivity.notes.setNote(replaseID,nName,nValue,selectDate);
                 else MainActivity.notes.setNote(replaseID,nName,nValue);
             }else{
-                MainActivity.notes.addNewNote(nName, nValue);
+                if (selectDate != null) MainActivity.notes.addNewNote(nName,nValue,selectDate);
+                else MainActivity.notes.addNewNote(nName,nValue);
             }
-
+            saveClassNote();
             selectDate = null;
 
             if (!isLandscape){
                 fragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container,MainActivity.itemFragmentNotes)
+                        .replace(R.id.fragment_container,MainActivity.mainFragment)
                         .commit();
             }else{
                 fragmentManager.beginTransaction()
                         .replace(R.id.fragment_container_note,new EmptyFragment())
-                        .replace(R.id.fragment_container, new ItemFragmentNotes())
+                        .replace(R.id.fragment_container, new MainFragment())
                         .commit();
             }
-
-
         });
 
         button_delete.setOnClickListener(v -> {
             MainActivity.notes.deleteNoteForId(replaseID);
-
+            saveClassNote();
             if (!isLandscape){
                 fragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container,MainActivity.itemFragmentNotes)
+                        .replace(R.id.fragment_container,MainActivity.mainFragment)
                         .commit();
             }else{
                 fragmentManager.beginTransaction()
                         .replace(R.id.fragment_container_note,new EmptyFragment())
-                        .replace(R.id.fragment_container, new ItemFragmentNotes())
+                        .replace(R.id.fragment_container, new MainFragment())
                         .commit();
             }
         });
@@ -146,15 +154,27 @@ public class EnterNoteFragment extends Fragment {
             int MONTH = gcalendar.DAY_OF_MONTH+1;
             int DAY = gcalendar.DAY_OF_WEEK_IN_MONTH;
             gcalendar.set(YEAR,MONTH,DAY);
-
             Context context = view.getContext();
             DatePickerDialog datePickerDialog = new DatePickerDialog(context,
                     (view1, year, month, dayOfMonth) -> {
                         gcalendar.set(year,month,dayOfMonth);
                         selectDate = gcalendar.getTime();
-                        textView_Date.setText(String.valueOf(selectDate));
+                        textView_Date.setText(formatDate.getCustomStringDate(selectDate));
                     },YEAR,MONTH,DAY);
             datePickerDialog.show();
         });
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        MenuItem item_search = menu.findItem(R.id.app_bar_search);
+        if (item_search != null) item_search.setVisible(false);
+
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    private void saveClassNote(){
+        String jsonNote = new GsonBuilder().create().toJson(MainActivity.notes);
+        MainActivity.sharedPrefClass.edit().putString(AppClassNote, jsonNote).apply();
     }
 }

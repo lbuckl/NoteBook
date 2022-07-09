@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/drawer_about"
+        android:icon="@android:drawable/ic_dialog_info"
+        android:title="@string/AboutApp" />
+    <item
+        android:id="@+id/drawer_settings"
+        android:title="@string/settings"
+        android:icon="@android:drawable/ic_menu_preferences" />
+    <item
+        android:id="@+id/drawer_exit"
+        android:icon="@android:drawable/ic_menu_compass"
+        android:title="@string/Exit"/>
+</menu>

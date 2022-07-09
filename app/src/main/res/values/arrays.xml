@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="Languiges">
+        <item>Выбрать</item>
+        <item>Английский</item>
+        <item>Русский</item>
+    </string-array>
+
+    <string-array name="Themes">
+        <item>Выбрать</item>
+        <item>Светлая</item>
+        <item>Темная</item>
+        <item>Красная</item>
+    </string-array>
+</resources>

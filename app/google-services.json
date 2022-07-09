@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "683737571873",
+    "project_id": "nbook-cbc73",
+    "storage_bucket": "nbook-cbc73.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:683737571873:android:95c1330c463fd78e423960",
+        "android_client_info": {
+          "package_name": "com.vados.notebook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "683737571873-308ilq2hsqccpmubt4t8bq8ka9trr9mc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vados.notebook",
+            "certificate_hash": "ad974126d3e1ee11643d431e112ce03fc91fa1f4"
+          }
+        },
+        {
+          "client_id": "683737571873-g0ic4oho4928tv3d4edhckiq691m811j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBRFYSFadexQpNJmgUat7Zsf28FuL7Zbrw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "683737571873-g0ic4oho4928tv3d4edhckiq691m811j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
