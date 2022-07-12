@@ -30,7 +30,7 @@ public class PlaceholderContent {
         return ITEMS;
     }
 
-    public void addItem(int position, String noteName, String note, Date noteDate) {
+    public void addItem(int position, String noteName, String note, String noteDate) {
         ITEMS.add(new PlaceholderItem(position, noteName, note, noteDate));
 
         //ITEM_MAP.put(new PlaceholderItem(String.valueOf(position), noteName, note)
@@ -49,10 +49,10 @@ public class PlaceholderContent {
         public int intDI;
         public final String content;
         public final String details;
-        public final Date noteDate;
+        public final String noteDate;
 
 
-        public PlaceholderItem(int id, String content, String details, Date date) {
+        public PlaceholderItem(int id, String content, String details, String date) {
             this.noteDate = date;
             this.intDI = id;
             this.id = String.valueOf(id);

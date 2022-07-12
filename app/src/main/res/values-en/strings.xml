@@ -12,4 +12,10 @@
     <string name="Them" translatable="false">Theme</string>
     <string name="Param" translatable="false">Parameter</string>
     <string name="Value" translatable="false">Value</string>
+    <string name="Search" translatable="false">Search</string>
+    <string name="AboutApp" translatable="false">AboutApp</string>
+    <string name="App" translatable="false">Application</string>
+    <string name="VersionApp" translatable="false">AppVersion</string>
+    <string name="Author" translatable="false">Author</string>
+    <string name="Exit" translatable="false">Exit</string>
 </resources>

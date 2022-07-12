@@ -11,11 +11,15 @@ import androidx.fragment.app.FragmentManager;
 import android.content.res.Configuration;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
+
+import com.vados.notebook.main.MainFragment;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -71,7 +75,10 @@ public class EnterNoteFragment extends Fragment {
         //Проверяем на поворот экрана в горизонталь. true - значи повёрнут
         isLandscape = getResources().getConfiguration().orientation ==
                 Configuration.ORIENTATION_LANDSCAPE;
-        //gcalendar.add(Calendar.HOUR,5);
+
+        //скрываем меню
+        setHasOptionsMenu(true);
+
         return view;
     }
 
@@ -90,7 +97,7 @@ public class EnterNoteFragment extends Fragment {
         if (replaseID > 0){
             textInput_NoteName.setText(MainActivity.notes.getNameForId(replaseID-1));
             textInput_Note.setText(MainActivity.notes.getNoteForId(replaseID-1));
-            textView_Date.setText(formatDate.getCustomStringDate(MainActivity.notes.getDateForId(replaseID-1)));
+            textView_Date.setText(MainActivity.notes.getDateForId(replaseID-1));
             button_delete.setVisibility(View.VISIBLE);
             button_delete.setClickable(true);
         }
@@ -107,20 +114,21 @@ public class EnterNoteFragment extends Fragment {
                 if (selectDate != null) MainActivity.notes.setNote(replaseID,nName,nValue,selectDate);
                 else MainActivity.notes.setNote(replaseID,nName,nValue);
             }else{
-                MainActivity.notes.addNewNote(nName, nValue);
+                if (selectDate != null) MainActivity.notes.addNewNote(nName,nValue,selectDate);
+                else MainActivity.notes.addNewNote(nName,nValue);
             }
 
             selectDate = null;
 
             if (!isLandscape){
                 fragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container,MainActivity.itemFragmentNotes)
+                        .replace(R.id.fragment_container,MainActivity.mainFragment)
                         .addToBackStack("EnteredNote")
                         .commit();
             }else{
                 fragmentManager.beginTransaction()
                         .replace(R.id.fragment_container_note,new EmptyFragment())
-                        .replace(R.id.fragment_container, new ItemFragmentNotes())
+                        .replace(R.id.fragment_container, new MainFragment())
                         .addToBackStack("EnteredNote")
                         .commit();
             }
@@ -131,13 +139,13 @@ public class EnterNoteFragment extends Fragment {
 
             if (!isLandscape){
                 fragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container,MainActivity.itemFragmentNotes)
+                        .replace(R.id.fragment_container,MainActivity.mainFragment)
                         .addToBackStack("EnteredNote")
                         .commit();
             }else{
                 fragmentManager.beginTransaction()
                         .replace(R.id.fragment_container_note,new EmptyFragment())
-                        .replace(R.id.fragment_container, new ItemFragmentNotes())
+                        .replace(R.id.fragment_container, new MainFragment())
                         .addToBackStack("EnteredNote")
                         .commit();
             }
@@ -158,5 +166,13 @@ public class EnterNoteFragment extends Fragment {
                     },YEAR,MONTH,DAY);
             datePickerDialog.show();
         });
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        MenuItem item_search = menu.findItem(R.id.app_bar_search);
+        if (item_search != null) item_search.setVisible(false);
+
+        super.onCreateOptionsMenu(menu, inflater);
     }
 }

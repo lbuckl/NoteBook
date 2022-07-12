@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="GeneralRowStyle">
+        <item name="android:textSize">16dp</item>
+        <item name="android:typeface">monospace</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="RowStyle">
+        <item name="android:textSize">16dp</item>
+    </style>
+
+    <style name="actionOverflowButtonStyle"
+        parent="@style/Widget.AppCompat.ActionButton.Overflow">
+        <item name="android:tint">@color/white</item>
+    </style>
+</resources>

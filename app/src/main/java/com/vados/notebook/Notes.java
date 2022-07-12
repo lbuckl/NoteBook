@@ -1,29 +1,37 @@
 package com.vados.notebook;
+
+import android.content.Context;
+import android.content.res.Resources;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-
 public class Notes {
+    private ArrayList<String> noteNames = new ArrayList<>();
+    private ArrayList<String> createDate = new ArrayList<>();
+    private ArrayList<String> notes = new ArrayList<>();
 
-    private final ArrayList<String> noteNames = new ArrayList<>();
-    private final ArrayList<Date> createDate = new ArrayList<>();
-    private final ArrayList<String> notes = new ArrayList<>();
     Calendar gcalendar = new GregorianCalendar();
+    FormatDate formatDate = new FormatDate();
 
-    //Создать запись только по имени
-    public void addNewNote(String name){
-        this.noteNames.add(name);
-        this.notes.add("");
-        this.createDate.add(gcalendar.getTime());
+    protected Notes() {
+
     }
 
-    //Создать запись только по имени и значению
+    //Создать запись по имени и значению
     public void addNewNote(String name, String note){
         this.noteNames.add(name);
         this.notes.add(note);
-        this.createDate.add(gcalendar.getTime());
+        this.createDate.add(formatDate.getCustomStringDate(gcalendar.getTime()));
+    }
+
+    //Создать запись по имени, значению и времени
+    public void addNewNote(String name, String note, Date date){
+        this.noteNames.add(name);
+        this.notes.add(note);
+        this.createDate.add(formatDate.getCustomStringDate(date));
     }
 
     public void deleteNoteForId(int id){
@@ -37,18 +45,13 @@ public class Notes {
         return noteNames.size();
     }
 
-    //Получим массив имён
-    public ArrayList<String> getArrayNames(){
-        return noteNames;
-    }
-
     //получить Имя по id
     public String getNameForId(int id){
         return noteNames.get(id);
     }
 
     //получить Дату и время по id
-    public Date getDateForId(int id){
+    public String getDateForId(int id){
         return createDate.get(id);
     }
 
@@ -72,15 +75,10 @@ public class Notes {
         try{
             this.notes.set(id-1,note);
             this.noteNames.set(id-1,name);
-            this.createDate.set(id-1,date);
+            this.createDate.set(id-1,formatDate.getCustomStringDate(date));
         }catch(IndexOutOfBoundsException e){
             e.printStackTrace();
         }
-    }
-
-    //записать Дату по id
-    public void setNoteDate(Date date){
-        this.createDate.add(date);
     }
 
 }

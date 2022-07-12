@@ -9,7 +9,7 @@ public class FormatDate {
     private Date date = null;
     private String sDate = "";
     private final Calendar gcalendar;
-    private final SimpleDateFormat dateFormat = new SimpleDateFormat("E d MMM y HH:mm");
+    private final SimpleDateFormat dateFormat = new SimpleDateFormat("d MMM y E HH:mm");
 
     {
         gcalendar = new GregorianCalendar();
