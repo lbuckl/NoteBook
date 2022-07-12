@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name" translatable="false">Notes</string>
+    <string name="add" translatable="false">Add</string>
+    <string name="settings" translatable="false">Settings</string>
+    <string name="noteName" translatable="false">Name</string>
+    <string name="description" translatable="false">Description</string>
+    <string name="date" translatable="false">Date</string>
+    <string name="apply" translatable="false">Apply</string>
+    <string name="delete" translatable="false">Delete</string>
+    <string name="select" translatable="false">Select</string>
+    <string name="Lang" translatable="false">Language</string>
+    <string name="Them" translatable="false">Theme</string>
+    <string name="Param" translatable="false">Parameter</string>
+    <string name="Value" translatable="false">Value</string>
+</resources>

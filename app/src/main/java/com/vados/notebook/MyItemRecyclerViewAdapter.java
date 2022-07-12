@@ -1,5 +1,6 @@
 package com.vados.notebook;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,14 +13,10 @@ import com.vados.notebook.databinding.FragmentItemNotesBinding;
 
 import java.util.List;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link PlaceholderItem}.
- * TODO: Replace the implementation with code for your data type.
- */
 public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder> {
 
     private final List<PlaceholderItem> mValues;
-
+    FormatDate formatDate = new FormatDate();
     //Конструктор
     public MyItemRecyclerViewAdapter(List<PlaceholderItem> items) {
         mValues = items;
@@ -28,6 +25,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
     //метод вызывается для создания объекта ViewHolder,
     // в конструктор которого необходимо передать созданный View-компонент,
     // с которым в дальнейшем будут связываться java объекты
+    @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new ViewHolder(FragmentItemNotesBinding
@@ -41,7 +39,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
         holder.mItem = mValues.get(position);
         holder.mIdView.setText(mValues.get(position).id);
         holder.mContentView.setText(mValues.get(position).content);
-        holder.mDateView.setText(String.valueOf(mValues.get(position).noteDate));
+        holder.mDateView.setText(formatDate.getCustomStringDate(mValues.get(position).noteDate));
 
         holder.itemView.setOnClickListener(v -> {
             FragmentManager fragmentManager = MainActivity.fragmentManager;
@@ -79,6 +77,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
             mDateView = binding.date;
         }
 
+        @NonNull
         @Override
         public String toString() {
             return super.toString() + " '" + mContentView.getText() + "'";

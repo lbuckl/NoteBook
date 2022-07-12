@@ -5,7 +5,7 @@
     android:id="@+id/dateInput_noteCreate"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="?attr/mainbackground"
     android:clickable="true"
     android:focusable="true"
     tools:context=".EnterNoteFragment">
@@ -24,8 +24,8 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp">
+            android:layout_marginTop="@dimen/margin_normal"
+            android:layout_marginBottom="@dimen/margin_normal">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/textInput_noteName"
@@ -37,7 +37,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="8dp">
+            android:layout_marginBottom="@dimen/margin_normal">
 
 
             <com.google.android.material.textfield.TextInputEditText
@@ -72,15 +72,16 @@
             android:layout_height="match_parent"
             android:layout_weight="10" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/button_selectDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:text="@string/select" />
+            android:layout_weight="1"
+            android:text="@string/select"
+            app:icon="@android:drawable/ic_menu_today" />
     </LinearLayout>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button_apply"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -88,7 +89,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
