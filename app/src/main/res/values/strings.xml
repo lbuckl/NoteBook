@@ -18,4 +18,7 @@
     <string name="VersionApp" translatable="false">Версия</string>
     <string name="Author" translatable="false">Автор</string>
     <string name="Exit" translatable="false">Выход</string>
+    <string name="Yes" translatable="false">Да</string>
+    <string name="No" translatable="false">Нет</string>
+    <string name="Deleted" translatable="false">Удалено</string>
 </resources>

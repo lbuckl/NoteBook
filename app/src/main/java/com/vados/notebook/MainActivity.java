@@ -2,16 +2,21 @@ package com.vados.notebook;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentContainerView;
 import androidx.fragment.app.FragmentManager;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -105,7 +110,6 @@ public class MainActivity extends AppCompatActivity {
                     Toast toast1 = Toast.makeText(this, "Найти", Toast.LENGTH_LONG);
                     toast1.show();
                     return true;
-
             case R.id.settings:
                 clearBackStack();
                 settingsFragment = new SettingsFragment();
@@ -187,7 +191,21 @@ public class MainActivity extends AppCompatActivity {
                         }
                         return true;
                     case R.id.drawer_exit:
-                        finish();
+                        Resources resources = getBaseContext().getResources();
+                        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(MainActivity.this);
+                        alertBuilder
+                                .setTitle(resources.getString(R.string.Exit))
+                                .setPositiveButton(resources.getString(R.string.Yes),
+                                        (dialog, which) -> {
+                                            finishAffinity();
+                                        })
+                                .setNegativeButton(resources.getString(R.string.No),
+                                        (dialog, which) -> {
+                                            drawer.close();
+                                        })
+                                .show();
+
+                        return true;
                 }
                 return false;
             }

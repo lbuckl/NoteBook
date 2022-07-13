@@ -5,11 +5,13 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.vados.notebook.main.MainFragment;
 import com.vados.notebook.placeholder.PlaceholderContent.PlaceholderItem;
@@ -67,6 +69,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
             Activity activity = MainActivity.mainFragment.getActivity();
             PopupMenu popupMenu = new PopupMenu(activity,v);
             activity.getMenuInflater().inflate(R.menu.menu_popup_note,popupMenu.getMenu());
+            Resources resources = activity.getBaseContext().getResources();
             popupMenu.setOnMenuItemClickListener(item -> {
                 switch (item.getItemId()){
                     case R.id.popup_delete:
@@ -75,6 +78,8 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
                                     .replace(R.id.fragment_container, new MainFragment())
                                     .addToBackStack("NoteFragment")
                                     .commit();
+                        Toast.makeText(activity.getBaseContext(),
+                                resources.getString(R.string.Deleted), Toast.LENGTH_SHORT).show();
                         return true;
                 }
                 return false;

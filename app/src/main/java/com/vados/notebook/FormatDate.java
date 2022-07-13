@@ -22,10 +22,8 @@ public class FormatDate {
     }
 
     public String getCustomStringDate(Date date){
-        String bufDate;
         gcalendar.setTime(date);
-        bufDate = dateFormat.format(gcalendar.getTime());
-        return bufDate;
+        return dateFormat.format(gcalendar.getTime());
     }
 
 }
