@@ -10,8 +10,13 @@
         <item name="android:textSize">16dp</item>
     </style>
 
+    <style name="CardStyle">
+        <item name="android:textSize">13dp</item>
+    </style>
+
     <style name="actionOverflowButtonStyle"
         parent="@style/Widget.AppCompat.ActionButton.Overflow">
         <item name="android:tint">@color/white</item>
     </style>
+
 </resources>
