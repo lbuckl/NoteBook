@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <item android:id="@+id/popup_change"
+        android:title="@string/Change"
+        />
     <item
         android:id="@+id/popup_delete"
         android:title="@string/delete" />

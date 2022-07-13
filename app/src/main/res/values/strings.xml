@@ -20,5 +20,7 @@
     <string name="Exit" translatable="false">Выход</string>
     <string name="Yes" translatable="false">Да</string>
     <string name="No" translatable="false">Нет</string>
+    <string name="Change" translatable="false">Изменить</string>
     <string name="Deleted" translatable="false">Удалено</string>
+    <string name="Error" translatable="false">Ошибка</string>
 </resources>

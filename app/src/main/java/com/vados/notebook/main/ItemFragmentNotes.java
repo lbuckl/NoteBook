@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -29,10 +30,8 @@ public class ItemFragmentNotes extends Fragment {
 
     // TODO: Customize parameters
     private int mColumnCount = 1;
+    public static MyItemRecyclerViewAdapter myItemRecyclerViewAdapter;
 
-    /**
-     * Обязательный элемент, не удалять!!!
-     */
     public ItemFragmentNotes() {
     }
 
@@ -63,8 +62,6 @@ public class ItemFragmentNotes extends Fragment {
             PlaceholderContent placeholderContent = new PlaceholderContent();
             placeholderContent.clearItems();
 
-            //recyclerView.setAdapter(new MyItemRecyclerViewAdapter(placeholderContent.getItems()));
-            //ковыряем адаптер
             try{
                 int noteSize = MainActivity.notes.getNotesSize();
                 if (noteSize >=1) {
@@ -78,11 +75,18 @@ public class ItemFragmentNotes extends Fragment {
             }catch (IndexOutOfBoundsException e){
                 e.printStackTrace();
             }
-            recyclerView.setAdapter(new MyItemRecyclerViewAdapter(placeholderContent.getItems())); //передаём
+            myItemRecyclerViewAdapter = new MyItemRecyclerViewAdapter(placeholderContent.getItems());
+            recyclerView.setAdapter(myItemRecyclerViewAdapter); //передаём
             // Добавим разделитель карточек
             DividerItemDecoration itemDecoration = new
                     DividerItemDecoration(this.getContext(), LinearLayoutManager.VERTICAL);
             recyclerView.addItemDecoration(itemDecoration);
+
+            //Включаем анимацию
+            DefaultItemAnimator animator = new DefaultItemAnimator();
+            animator.setAddDuration(1000);
+            animator.setRemoveDuration(1000);
+            recyclerView.setItemAnimator(animator);
 
         }
         return view;
